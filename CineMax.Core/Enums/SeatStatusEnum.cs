@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CineMax.Core.Enums
 {
-    public enum StatusSeatEnum 
+    public enum SeatStatusEnum 
     {
        Reserved = 0,
        Free = 1

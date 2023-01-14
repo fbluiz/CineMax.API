@@ -1,9 +1,4 @@
 ﻿using CineMax.Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CineMax.Core.Entities
 {
@@ -11,13 +6,16 @@ namespace CineMax.Core.Entities
     {
         public Section Section { get; private set; }
         public Seat Seat { get; private set; }
+        public DateTime CreatedOn { get; private set; }
         public TicketStatusEnum Status { get; private set; }
         public int SectionId { get; private set; }
         public int SeatId { get; private set; }
+        
 
         public Ticket(int sectionId, int seatId)
         {
             SectionId = sectionId;
+            CreatedOn= DateTime.Now;
             SeatId = seatId;
             Status = TicketStatusEnum.PaymentAwaiting;
         }
