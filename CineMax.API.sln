@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineMax.API", "CineMax.API\CineMax.API.csproj", "{17F34F25-D6A1-4049-8F02-52575238EAA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CineMax.API", "CineMax.API\CineMax.API.csproj", "{17F34F25-D6A1-4049-8F02-52575238EAA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineMax.Application", "CineMax.Application\CineMax.Application.csproj", "{4C211C22-9FC9-4161-8EEB-65825BC6E264}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineMax.Core", "CineMax.Core\CineMax.Core.csproj", "{D60CDF48-7ED8-4A0A-BCDD-00D3DC58181F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineMax.Infra", "CineMax.Infra\CineMax.Infra.csproj", "{B978C175-A306-47D8-872F-5ECABDC87BC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{17F34F25-D6A1-4049-8F02-52575238EAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17F34F25-D6A1-4049-8F02-52575238EAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17F34F25-D6A1-4049-8F02-52575238EAA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C211C22-9FC9-4161-8EEB-65825BC6E264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C211C22-9FC9-4161-8EEB-65825BC6E264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C211C22-9FC9-4161-8EEB-65825BC6E264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C211C22-9FC9-4161-8EEB-65825BC6E264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60CDF48-7ED8-4A0A-BCDD-00D3DC58181F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60CDF48-7ED8-4A0A-BCDD-00D3DC58181F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60CDF48-7ED8-4A0A-BCDD-00D3DC58181F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60CDF48-7ED8-4A0A-BCDD-00D3DC58181F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B978C175-A306-47D8-872F-5ECABDC87BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B978C175-A306-47D8-872F-5ECABDC87BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B978C175-A306-47D8-872F-5ECABDC87BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B978C175-A306-47D8-872F-5ECABDC87BC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
