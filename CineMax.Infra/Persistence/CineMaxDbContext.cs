@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,90 +27,7 @@ namespace CineMax.Infra.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasKey(u => u.Id);
-
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.MyTickets)
-                .WithOne(t => t.User)
-                .HasForeignKey(t => t.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Movie>()
-                 .HasKey(m => m.Id);
-
-            modelBuilder.Entity<Movie>()
-                .HasMany(m => m.Sections)
-                .WithOne(s => s.Movie)
-                .HasForeignKey(s => s.MovieId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Room>()
-                .HasKey(r => r.Id);
-
-            modelBuilder.Entity<Room>()
-               .HasMany(r => r.Sections)
-               .WithOne(s => s.Room)
-               .HasForeignKey(s => s.RoomId)
-               .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Room>()
-                .HasMany(r => r.Seats)
-                .WithOne(s => s.Room)
-                .HasForeignKey(s => s.RoomId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Seat>()
-                .HasKey(s => s.Id);
-
-            modelBuilder.Entity<Seat>()
-                .HasOne(s => s.Room)
-                .WithMany(r => r.Seats)
-                .HasForeignKey(s => s.RoomId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Section>()
-                .HasKey(s => s.Id);
-
-            modelBuilder.Entity<Section>()
-                .HasOne(s => s.Movie)
-                .WithMany(m => m.Sections)
-                .HasForeignKey(s => s.MovieId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Section>()
-                .HasOne(s => s.Room)
-                .WithMany(r => r.Sections)
-                .HasForeignKey(s => s.RoomId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Section>()
-                .HasMany(s => s.Tickets)
-                .WithOne(t => t.Section)
-                .HasForeignKey(t => t.SectionId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Ticket>()
-                .HasKey(s => s.Id);
-
-            modelBuilder.Entity<Ticket>()
-                .HasOne(t => t.User)
-                .WithMany(u => u.MyTickets)
-                .HasForeignKey(t => t.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Ticket>()
-                .HasOne(t => t.Seat)
-                .WithMany()
-                .HasForeignKey(t => t.SeatId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-
-            modelBuilder.Entity<Ticket>()
-                .HasOne(t => t.Section)
-                .WithMany(s => s.Tickets)
-                .HasForeignKey(t => t.SectionId)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
