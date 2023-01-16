@@ -16,15 +16,15 @@ namespace CineMax.Core.Entities
         public Movie Movie { get; private set; }
         public Room Room { get; private set; }
 
-        public Section(string name, string description, DateTime startSection, DateTime endSection, int idMovie, int idRoom)
+        public Section(string name, string description, DateTime startSection, DateTime endSection, int movieId, int roomId)
         {
             Name = name;
             Description = description;
             StartSection = startSection;
             EndSection = endSection;
             CreatedOn = DateTime.Now;
-            MovieId = idMovie;
-            RoomId = idRoom;
+            MovieId = movieId;
+            RoomId = roomId;
             Status = SectionStatusEnum.Created;
             Tickets = new List<Ticket>();
         }
