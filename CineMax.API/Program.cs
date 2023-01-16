@@ -1,3 +1,6 @@
+using CineMax.Infra.Persistence;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var connectionString1 = builder.Configuration.GetConnectionString("CineMaxCsFb");
+// ATENÇÃO! Alterar a referência da string de conexão
+builder.Services.AddDbContext<CineMaxDbContext>(options => options
+.UseSqlServer(connectionString1));
+
+
 
 var app = builder.Build();
 

@@ -4,24 +4,26 @@
     {
         public string Name { get; private set; }
         public bool IsRoomOcuped { get; private set; }
-        public List<Section> ListSections { get; private set; }
-        public List<Seat> ListSeats { get; private set; }
+        public List<Section> Sections { get; private set; }
+        public List<Seat> Seats { get; private set; }
 
         public Room(string name)
         {
             Name = name;
             IsRoomOcuped = false;
-            ListSections= new List<Section>();
-            ListSeats= new List<Seat>();
+            Sections= new List<Section>();
+            Seats= new List<Seat>();
         }
 
         public void Occupy()
         {
+            if (IsRoomOcuped == false)
             IsRoomOcuped = true;
         }
 
         public void Release()
         {
+            if (IsRoomOcuped == true)
             IsRoomOcuped = false;
         }
 

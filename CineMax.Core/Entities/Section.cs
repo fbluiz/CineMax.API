@@ -2,7 +2,7 @@
 
 namespace CineMax.Core.Entities
 {
-    public class Section
+    public class Section : BaseEntity
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
@@ -10,8 +10,8 @@ namespace CineMax.Core.Entities
         public DateTime EndSection { get; private set; }
         public DateTime CreatedOn { get; private set; }
         public SectionStatusEnum Status { get; private set; }
-        public int IdMovie { get; private set; }
-        public int IdRoom { get; private set; }
+        public int MovieId { get; private set; }
+        public int RoomId { get; private set; }
         public Movie Movie { get; private set; }
         public Room Room { get; private set; }
         public List<Ticket> ListTickets { get; private set;}
