@@ -61,7 +61,55 @@ namespace CineMax.Infra.Persistence
 
             modelBuilder.Entity<Seat>()
                 .HasKey(s => s.Id);
-                
+
+            modelBuilder.Entity<Seat>()
+                .HasOne(s => s.Room)
+                .WithMany(r => r.Seats)
+                .HasForeignKey(s => s.RoomId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Section>()
+                .HasKey(s => s.Id);
+
+            modelBuilder.Entity<Section>()
+                .HasOne(s => s.Movie)
+                .WithMany(m => m.Sections)
+                .HasForeignKey(s => s.MovieId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Section>()
+                .HasOne(s => s.Room)
+                .WithMany(r => r.Sections)
+                .HasForeignKey(s => s.RoomId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Section>()
+                .HasMany(s => s.Tickets)
+                .WithOne(t => t.Section)
+                .HasForeignKey(t => t.SectionId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Ticket>()
+                .HasKey(s => s.Id);
+
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.User)
+                .WithMany(u => u.MyTickets)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.Seat)
+                .WithMany()
+                .HasForeignKey(t => t.SeatId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.Section)
+                .WithMany(s => s.Tickets)
+                .HasForeignKey(t => t.SectionId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

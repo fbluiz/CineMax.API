@@ -10,11 +10,11 @@ namespace CineMax.Core.Entities
         public DateTime EndSection { get; private set; }
         public DateTime CreatedOn { get; private set; }
         public SectionStatusEnum Status { get; private set; }
+        public List<Ticket> Tickets { get; private set; }
         public int MovieId { get; private set; }
         public int RoomId { get; private set; }
         public Movie Movie { get; private set; }
         public Room Room { get; private set; }
-        public List<Ticket> ListTickets { get; private set;}
 
         public Section(string name, string description, DateTime startSection, DateTime endSection, int idMovie, int idRoom)
         {
@@ -23,9 +23,10 @@ namespace CineMax.Core.Entities
             StartSection = startSection;
             EndSection = endSection;
             CreatedOn = DateTime.Now;
-            IdMovie = idMovie;
-            IdRoom = idRoom;
+            MovieId = idMovie;
+            RoomId = idRoom;
             Status = SectionStatusEnum.Created;
+            Tickets = new List<Ticket>();
         }
 
         public void Progress()

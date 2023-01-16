@@ -9,6 +9,7 @@ namespace CineMax.Core.Entities
         public string Position { get; private set; }      
         public int RoomId { get; private set; }
         public Room Room { get; private set; }
+       
         public Seat(string position, int roomId)
         {
             Status = SeatStatusEnum.Free;
