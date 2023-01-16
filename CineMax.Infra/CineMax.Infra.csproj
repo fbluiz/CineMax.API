@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Auth\" />
     <Folder Include="Persistence\Migrations\" />
-    <Folder Include="Persistence\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>

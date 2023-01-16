@@ -1,4 +1,6 @@
+using CineMax.Application.Commands.CreateUser;
 using CineMax.Infra.Persistence;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,8 @@ var connectionString1 = builder.Configuration.GetConnectionString("CineMaxCsVini
 builder.Services.AddDbContext<CineMaxDbContext>(options => options
 .UseSqlServer(connectionString1));
 
+//MediatR utiliza o assembly para mapear todos os outros com a interfarce iRequest e iRequestHandler
+builder.Services.AddMediatR(typeof(CreateUserCommand));
 
 
 var app = builder.Build();
