@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CineMax.Infra.Migrations
 {
-    [DbContext(typeof(CineMaxDbContext))]
+    [DbContext(typeof(ICineMaxDbContext))]
     [Migration("20230116043556_correcao")]
     partial class correcao
     {

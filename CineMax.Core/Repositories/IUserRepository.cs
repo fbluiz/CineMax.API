@@ -2,7 +2,7 @@
 
 namespace CineMax.Core.Repositories
 {
-    public interface IUsersRepository
+    public interface IUserRepository
     {
         Task<List<User>> GetAllAsync();
     }

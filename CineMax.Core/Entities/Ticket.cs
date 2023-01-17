@@ -14,7 +14,13 @@ namespace CineMax.Core.Entities
         public User User { get; private set; }
 
 
+#pragma warning disable CS8618 // O propriedade não anulável 'Seat' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.
+#pragma warning disable CS8618 // O propriedade não anulável 'User' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.
+#pragma warning disable CS8618 // O propriedade não anulável 'Section' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.
         public Ticket(int sectionId, int seatId)
+#pragma warning restore CS8618 // O propriedade não anulável 'Section' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.
+#pragma warning restore CS8618 // O propriedade não anulável 'User' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.
+#pragma warning restore CS8618 // O propriedade não anulável 'Seat' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.
         {
             SectionId = sectionId;
             CreatedOn= DateTime.Now;
