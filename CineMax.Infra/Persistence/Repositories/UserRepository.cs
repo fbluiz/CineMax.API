@@ -5,11 +5,11 @@ namespace CineMax.Infra.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ICineMaxDbContext _dbC0ontext;
+        private readonly ICineMaxDbContext _dbContext;
 
-        public UserRepository(ICineMaxDbContext dbC0ontext)
+        public UserRepository(ICineMaxDbContext dbContext)
         {
-            _dbC0ontext = dbC0ontext;
+            _dbContext = dbContext;
         }
         public Task<List<User>> GetAllAsync()
         {
