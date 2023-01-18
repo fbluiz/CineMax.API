@@ -12,10 +12,14 @@ namespace CineMax.Infra.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-
-        public async Task<List<Movie>> GetAllMovies()
+        public async Task<List<Movie>> GetAllMoviesAsync()
         {
             return await _dbContext.Movies.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<Movie> GetMovieByIdAsync(int id)
+        {
+            return await _dbContext.Movies.Include(m => m.Sections).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
         }
     }
 }

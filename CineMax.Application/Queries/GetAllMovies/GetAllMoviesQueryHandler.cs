@@ -12,10 +12,9 @@ namespace CineMax.Application.Queries.GetAllMovies
         {
             _movieRepository = movieRepository;
         }
-
         public async Task<List<MovieViewModel>> Handle(GetAllMoviesQuery request, CancellationToken cancellationToken)
         {
-            var movies = await _movieRepository.GetAllMovies();
+            var movies = await _movieRepository.GetAllMoviesAsync();
            
             var moviesViewModel = movies.Select(m => new MovieViewModel { Title = m.Title, Description = m.Description, Duration = m.Duration, ImageURL = m.ImageURL, Status = m.Status,TrailerURL = m.TrailerURL}).ToList();
 
