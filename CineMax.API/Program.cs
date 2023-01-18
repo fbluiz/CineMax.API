@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
-var connectionString1 = builder.Configuration.GetConnectionString("CineMaxCsFb");
+var connectionString1 = builder.Configuration.GetConnectionString("CineMaxCsVini");
 // ATENÇÃO! Alterar a referência da string de conexão
 builder.Services.AddDbContext<ICineMaxDbContext>(options => options
 .UseSqlServer(connectionString1));

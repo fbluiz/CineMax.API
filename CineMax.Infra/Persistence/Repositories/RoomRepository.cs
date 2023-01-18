@@ -20,7 +20,7 @@ namespace CineMax.Infra.Persistence.Repositories
 
         public async Task<List<Room>> GetAllRoomAndSectionsAsync()
         {
-            return await _dbContext.Rooms.Include(r => r.Sections).ThenInclude(r=>r.Movie).AsNoTracking().ToListAsync();
+            return await _dbContext.Rooms.Include(r => r.Sections).ThenInclude(r=>r.Movie).Include(r => r.Seats).AsNoTracking().ToListAsync();
 
         }
 
