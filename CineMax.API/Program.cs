@@ -1,5 +1,7 @@
 using CineMax.Application.Commands.CreateUser;
+using CineMax.Core.Repositories;
 using CineMax.Infra.Persistence;
+using CineMax.Infra.Persistence.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +22,7 @@ builder.Services.AddDbContext<CineMaxDbContext>(options => options
 //MediatR utiliza o assembly para mapear todos os outros com a interfarce iRequest e iRequestHandler
 builder.Services.AddMediatR(typeof(CreateUserCommand));
 
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 var app = builder.Build();
 
