@@ -9,15 +9,14 @@ using System.Threading.Tasks;
 
 namespace CineMax.Infra.Persistence
 {
-    public class CineMaxDbContext : DbContext
+    public class ICineMaxDbContext : DbContext
     {
         //Classe que são criadas as tabelas e passadas por EntityFramework
         //Baixar os pacotes nuget Ef Core tools, Ef Core Design, Ef Core SQL
-        public CineMaxDbContext(DbContextOptions<CineMaxDbContext> options) : base(options)
+        public ICineMaxDbContext(DbContextOptions<ICineMaxDbContext> options) : base(options)
         {
 
         }
-
         public DbSet<User> Users { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Room> Rooms { get; set; }

@@ -14,9 +14,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString1 = builder.Configuration.GetConnectionString("CineMaxCsVini");
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+
+var connectionString1 = builder.Configuration.GetConnectionString("CineMaxCsFb");
 // ATENÇÃO! Alterar a referência da string de conexão
-builder.Services.AddDbContext<CineMaxDbContext>(options => options
+builder.Services.AddDbContext<ICineMaxDbContext>(options => options
 .UseSqlServer(connectionString1));
 
 //MediatR utiliza o assembly para mapear todos os outros com a interfarce iRequest e iRequestHandler

@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CineMax.Application\CineMax.Application.csproj" />
+    <ProjectReference Include="..\CineMax.Core\CineMax.Core.csproj" />
     <ProjectReference Include="..\CineMax.Infra\CineMax.Infra.csproj" />
   </ItemGroup>
 
