@@ -1,6 +1,7 @@
 ﻿using CineMax.Core.Entities;
 using CineMax.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime;
 
 namespace CineMax.Infra.Persistence.Repositories
 {
@@ -24,9 +25,9 @@ namespace CineMax.Infra.Persistence.Repositories
 
         }
 
-        public Task<Room> GetByIdRoomAsync(int id)
+        public async Task<Room> GetByIdRoomAndSectionsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Rooms.Where(r => r.Id == id).Include(r => r.Sections).ThenInclude(r => r.Movie).Include(r => r.Seats).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public Task<Room> UpdateRoomAsync(Room room)

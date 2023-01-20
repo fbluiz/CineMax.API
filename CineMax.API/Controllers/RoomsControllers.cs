@@ -1,5 +1,7 @@
 ﻿using CineMax.Application.Queries.GetAllRoom;
+using CineMax.Application.Queries.GetRoomAndSectionById;
 using CineMax.Application.ViewModels;
+using CineMax.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,9 +22,22 @@ namespace CineMax.API.Controllers
         {
             var query = new GetAllRoomAndSectionQuery();
 
-            var roomAndSections = await _mediator.Send(query);
+            var roomsAndSections = await _mediator.Send(query);
 
-            return Ok(roomAndSections);
+            return Ok(roomsAndSections);
+        }
+
+        [HttpGet("{id})")]
+        public async Task<IActionResult> GetRoomAndSectionById(int id)
+        {
+            var query = new GetRoomAndSectionByIdQuery(id);
+
+            var roomAndSection = await _mediator.Send(query);
+
+            if (roomAndSection == null)
+                return BadRequest("Sala não encontrada na nossa base de dados");
+
+            return Ok(roomAndSection);
         }
     }
 }
