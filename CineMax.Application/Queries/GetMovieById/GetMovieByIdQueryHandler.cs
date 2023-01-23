@@ -25,7 +25,7 @@ namespace CineMax.Application.Queries.GetMovieById
             if (movie == null)
                 return null;
 
-            var movieViewModel = new MovieViewModel { Title = movie.Title,TrailerURL = movie.TrailerURL,Description = movie.Description, Duration = movie.Duration, ImageURL = movie.ImageURL, Status = movie.Status};
+            var movieViewModel = new MovieViewModel { Title = movie.Title,TrailerURL = movie.TrailerURL,Description = movie.Description, Duration = movie.Duration.ToString(), ImageURL = movie.ImageURL, Status = movie.Status};
 
             return movieViewModel;
             

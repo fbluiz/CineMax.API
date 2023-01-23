@@ -1,7 +1,5 @@
 ﻿using CineMax.Application.Queries.GetAllRoom;
 using CineMax.Application.Queries.GetRoomAndSectionById;
-using CineMax.Application.ViewModels;
-using CineMax.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
