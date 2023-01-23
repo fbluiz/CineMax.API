@@ -1,5 +1,7 @@
-﻿using CineMax.Application.Queries.GetAllMovies;
+﻿using CineMax.Application.Commands.CreateMovie;
+using CineMax.Application.Queries.GetAllMovies;
 using CineMax.Application.Queries.GetMovieById;
+using CineMax.Application.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +38,14 @@ namespace CineMax.API.Controllers
                 return BadRequest("Filme não encontrado na nossa base de dados");
 
             return Ok(movie);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateMovieCommand commannd)
+        {
+            var id = await _mediator.Send(commannd);
+
+            return CreatedAtAction(nameof(GetById), new {id = id}, commannd);
         }
     }
 }

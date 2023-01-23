@@ -4,15 +4,15 @@ namespace CineMax.Core.Entities
 {
     public class Movie : BaseEntity
     {   
-        public string Title { get; set; }
+        public string Title { get; private set; }
         public string Description { get; private set; }
         public string ImageURL { get; private set; }
         public string TrailerURL { get; private set; }
-        public DateTime Duration { get; private set; }
+        public TimeSpan Duration { get; private set; }
         public MovieStatusEnum Status { get; private set; }
         public List<Section> Sections { get; private set; }
 
-        public Movie(string title, string description, string imageURL, string trailerURL, DateTime duration, MovieStatusEnum status)
+        public Movie(string title, string description, string imageURL, string trailerURL, TimeSpan duration, MovieStatusEnum status)
         {
             Title = title;
             Description = description;
