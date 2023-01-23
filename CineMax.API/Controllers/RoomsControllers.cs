@@ -1,4 +1,5 @@
-﻿using CineMax.Application.Queries.GetAllRoom;
+﻿using CineMax.Application.Commands.UpdateRoomCommand;
+using CineMax.Application.Queries.GetAllRoom;
 using CineMax.Application.Queries.GetRoomAndSectionById;
 using CineMax.Application.ViewModels;
 using CineMax.Core.Entities;
@@ -38,6 +39,14 @@ namespace CineMax.API.Controllers
                 return BadRequest("Sala não encontrada na nossa base de dados");
 
             return Ok(roomAndSection);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateRoom([FromRoute]int id, [FromBody] UpdateRoomCommand command)
+        {
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }

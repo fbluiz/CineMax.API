@@ -5,7 +5,7 @@
         public string Name { get; private set; }
         public bool IsRoomOcuped { get; private set; }
         public List<Section> Sections { get; private set; }
-        public List<Seat> Seats { get; private set; }
+        public List<Seat> Seats { get; private set; } 
 
         public Room(string name)
         {
@@ -25,6 +25,12 @@
         {
             if (IsRoomOcuped == true)
             IsRoomOcuped = false;
+        }
+
+        public void Update(string name, bool isRoomOcuped)
+        {
+            Name = name;
+            IsRoomOcuped= isRoomOcuped;
         }
 
     }

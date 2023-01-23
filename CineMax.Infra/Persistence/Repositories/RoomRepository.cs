@@ -14,6 +14,11 @@ namespace CineMax.Infra.Persistence.Repositories
             _dbContext = dbContext;
         }
 
+        public Task<int> AddRoomAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Room> DeleteRoomAsync(int id)
         {
             throw new NotImplementedException();
@@ -30,9 +35,17 @@ namespace CineMax.Infra.Persistence.Repositories
             return await _dbContext.Rooms.Where(r => r.Id == id).Include(r => r.Sections).ThenInclude(r => r.Movie).Include(r => r.Seats).AsNoTracking().FirstOrDefaultAsync();
         }
 
-        public Task<Room> UpdateRoomAsync(Room room)
+        public async Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            await _dbContext.SaveChangesAsync();
+            
+        }
+
+        public void UpdateRoom(Room room)
+        {
+           _dbContext.Entry(room).State = EntityState.Modified;
+
+          _dbContext.Set<Room>().Update(room);
         }
     }
 }

@@ -6,7 +6,8 @@ namespace CineMax.Core.Repositories
     {
         Task<List<Room>> GetAllRoomAndSectionsAsync();
         Task<Room> GetByIdRoomAndSectionsAsync(int id);
-        Task<Room> UpdateRoomAsync(Room room);
-        Task<Room> DeleteRoomAsync(int id);
+        Task SaveChangesAsync();
+        Task<int> AddRoomAsync();
+        void UpdateRoom(Room room);
     }
 }
