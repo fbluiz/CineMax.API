@@ -50,5 +50,16 @@ namespace CineMax.Core.Entities
             if (Status == MovieStatusEnum.Disponible)
                 Status = MovieStatusEnum.Indisponible;
         }
+
+        public void Update(string title, string description, string imageURL,
+                    string trailerURL, TimeSpan? duration, MovieStatusEnum? status)
+        {
+            Title = title;
+            Description = description;
+            ImageURL = imageURL;
+            TrailerURL = trailerURL;
+            Duration = Duration;
+            Status = Status;
+        }
     }
 }

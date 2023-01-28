@@ -2,11 +2,7 @@
 
 namespace CineMax.Core.Repositories
 {
-    public interface IMovieRepository
+    public interface IMovieRepository : IRepository<Movie>
     {
-        Task<List<Movie>> GetAllMoviesAsync();
-        Task<Movie> GetMovieByIdAsync(int id);
-        Task AddMovieAsync(Movie movie);
-        Task SaveChangesAsync();
     }
 }
