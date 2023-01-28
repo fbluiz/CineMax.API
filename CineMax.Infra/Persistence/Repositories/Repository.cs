@@ -15,11 +15,13 @@ namespace CineMax.Infra.Persistence.Repositories
         public async Task AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
+            await SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public async Task DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
+            await SaveChangesAsync();
         }
 
         public async Task<List<T>> GetAsync()
@@ -31,11 +33,17 @@ namespace CineMax.Infra.Persistence.Repositories
         {
             return await _dbContext.Set<T>().AsNoTracking().SingleOrDefaultAsync(predicate);
         }
-        
-        public void Update(T entity)
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             _dbContext.Set<T>().Update(entity);
+            await SaveChangesAsync();
         }
     }
 }

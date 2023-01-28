@@ -20,7 +20,7 @@ namespace CineMax.Application.Queries.GetMovieById
 
         public async Task<MovieViewModel> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
         {
-            var movie = await _movieRepository.GetMovieByIdAsync(request.Id);
+            var movie = await _movieRepository.GetByIdAsync(m => m.Id == request.Id);
 
             if (movie == null)
                 return null;

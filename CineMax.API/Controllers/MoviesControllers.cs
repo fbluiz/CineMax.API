@@ -1,4 +1,5 @@
 ﻿using CineMax.Application.Commands.CreateMovie;
+using CineMax.Application.Commands.UpdateMovie;
 using CineMax.Application.Queries.GetAllMovies;
 using CineMax.Application.Queries.GetMovieById;
 using CineMax.Application.ViewModels;
@@ -45,8 +46,19 @@ namespace CineMax.API.Controllers
         {
             var id = await _mediator.Send(commannd);
 
-            return CreatedAtAction(nameof(GetById), new {id = id}, commannd);
+            return CreatedAtAction(nameof(GetById), new { id = id }, commannd);
         }
+
+        [HttpPut("{id})")]
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] UpdateMovieCommand command)
+        {
+            await _mediator.Send(command);
+
+            if (command == null) return BadRequest("Erro no tilinha");
+
+            return Ok("Atualização feita com sucesso!");
+        }
+
     }
 }
 

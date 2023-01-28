@@ -19,7 +19,7 @@ namespace CineMax.Application.Commands.CreateMovie
             var duration = TimeSpan.Parse(request.Duration);
             var movie = new Movie(request.Title, request.Description, request.ImageURL, request.TrailerURL, duration, request.Status);
 
-            await _movieRepository.AddMovieAsync(movie);
+            await _movieRepository.AddAsync(movie);
 
             return movie.Id;
         }
