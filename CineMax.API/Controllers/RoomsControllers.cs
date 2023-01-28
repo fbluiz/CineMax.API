@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CineMax.API.Controllers
 {
+    //teste
     [Route("api/rooms")]
     public class RoomsControllers : ControllerBase
     {
@@ -34,7 +35,7 @@ namespace CineMax.API.Controllers
             var roomAndSection = await _mediator.Send(query);
 
             if (roomAndSection == null)
-                return BadRequest("Sala não encontrada na nossa base de dados");
+                return BadRequest("Sala não encontrada na nossa base de dados ");
 
             return Ok(roomAndSection);
         }

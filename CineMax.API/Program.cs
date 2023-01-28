@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 
 
 
-var connectionString = builder.Configuration.GetConnectionString("CineMaxCsVini");
+var connectionString = builder.Configuration.GetConnectionString("CineMaxCsFb");
 // ATENÇÃO! Alterar a referência da string de conexão
 builder.Services.AddDbContext<ICineMaxDbContext>(options => options
 .UseSqlServer(connectionString));
