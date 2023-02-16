@@ -1,7 +1,6 @@
 ﻿using CineMax.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace CineMax.Infra.Persistence.Configurations
 {
@@ -29,6 +28,8 @@ namespace CineMax.Infra.Persistence.Configurations
                 .WithMany(s => s.Tickets)
                 .HasForeignKey(t => t.SectionId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(c => c.Status).HasConversion<string>();
         }
     }
 }

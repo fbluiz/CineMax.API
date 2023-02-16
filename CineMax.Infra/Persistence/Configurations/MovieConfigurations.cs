@@ -17,6 +17,8 @@ namespace CineMax.Infra.Persistence.Configurations
                 .WithOne(s => s.Movie)
                 .HasForeignKey(s => s.MovieId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(m => m.Status).HasConversion<string>();
         }
     }
 }

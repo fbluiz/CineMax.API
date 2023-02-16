@@ -16,6 +16,10 @@ namespace CineMax.Infra.Persistence.Configurations
                 .WithMany(r => r.Seats)
                 .HasForeignKey(s => s.RoomId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(s => s.Status).HasConversion<string>();
+
         }
+
     }
 }

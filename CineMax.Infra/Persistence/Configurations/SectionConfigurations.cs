@@ -29,6 +29,9 @@ namespace CineMax.Infra.Persistence.Configurations
                 .WithOne(t => t.Section)
                 .HasForeignKey(t => t.SectionId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(c => c.Status).HasConversion<string>();
+
         }
     }
 }
