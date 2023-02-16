@@ -1,4 +1,6 @@
 ﻿using CineMax.Application.Commands.CreateSection;
+using CineMax.Application.Queries.GetAllRoom;
+using CineMax.Application.Queries.GetAllSections;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,5 +23,19 @@ namespace CineMax.API.Controllers
 
             return Ok(Section);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllSections()
+        {
+            var query = new GetAllSectionsQuery();
+            var sections = await _mediator.Send(query);
+
+            return Ok(sections);
+        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetSectionsDisponible()
+        //{
+        //    var query = new GetSectionsDisponibleQuery();
+        //    var sections = await _mediator.Send(query);
+        //}
     }
 }
