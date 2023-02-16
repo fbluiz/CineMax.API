@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CineMax.Application.Commands.UpdateRoomCommand
 {
-    public class UpdateRoomCommandHandler : IRequestHandler<UpdateRoomCommand, Unit>
+    public class UpdateRoomCommandHandler : IRequestHandler<UpdateRoomCommand, int>
     {
         private readonly IRoomRepository _roomRepository;
 
@@ -12,17 +12,15 @@ namespace CineMax.Application.Commands.UpdateRoomCommand
             _roomRepository = roomRepository;
         }
 
-        public async Task<Unit> Handle(UpdateRoomCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(UpdateRoomCommand request, CancellationToken cancellationToken)
         {
             var room = await _roomRepository.GetByIdRoomAndSectionsAsync(request.Id);
 
             room.Update(request.Name, request.IsRoomOcuped);
 
-            _roomRepository.UpdateRoom(room);
-            
-            await _roomRepository.SaveChangesAsync();
+            await _roomRepository.UpdateAsync(room);
 
-            return Unit.Value;
+            return room.Id;
         }
     }
 }

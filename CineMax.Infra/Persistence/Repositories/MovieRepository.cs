@@ -1,6 +1,6 @@
 ﻿using CineMax.Core.Entities;
 using CineMax.Core.Repositories;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace CineMax.Infra.Persistence.Repositories
 {

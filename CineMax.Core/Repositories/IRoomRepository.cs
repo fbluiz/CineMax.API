@@ -2,12 +2,9 @@
 
 namespace CineMax.Core.Repositories
 {
-    public interface IRoomRepository
+    public interface IRoomRepository : IRepository<Room>
     {
         Task<List<Room>> GetAllRoomAndSectionsAsync();
         Task<Room> GetByIdRoomAndSectionsAsync(int id);
-        Task SaveChangesAsync();
-        Task<int> AddRoomAsync();
-        void UpdateRoom(Room room);
     }
 }

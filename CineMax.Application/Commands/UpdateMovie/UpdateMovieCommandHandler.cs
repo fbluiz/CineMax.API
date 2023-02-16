@@ -1,6 +1,4 @@
-﻿using CineMax.Core.Entities;
-using CineMax.Core.Enums;
-using CineMax.Core.Repositories;
+﻿using CineMax.Core.Repositories;
 using MediatR;
 
 namespace CineMax.Application.Commands.UpdateMovie

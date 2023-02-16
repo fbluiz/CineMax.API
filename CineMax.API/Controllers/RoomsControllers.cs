@@ -43,9 +43,9 @@ namespace CineMax.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateRoom([FromRoute]int id, [FromBody] UpdateRoomCommand command)
         {
-            await _mediator.Send(command);
+            var roomId = await _mediator.Send(command);
 
-            return NoContent();
+            return CreatedAtAction(nameof(GetRoomAndSectionById), new { id = id }, id);
         }
     }
 }

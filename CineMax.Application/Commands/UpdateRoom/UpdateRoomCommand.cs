@@ -2,7 +2,7 @@
 
 namespace CineMax.Application.Commands.UpdateRoomCommand
 {
-    public class UpdateRoomCommand: IRequest<Unit>
+    public class UpdateRoomCommand: IRequest<int>
     {
         public int Id { get; set; }
         public string Name { get; set; }
