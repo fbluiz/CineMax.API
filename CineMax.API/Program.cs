@@ -27,6 +27,7 @@ builder.Services.AddMediatR(typeof(CreateUserCommand));
 //Mapeamento padrão repository
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 
 var app = builder.Build();
 

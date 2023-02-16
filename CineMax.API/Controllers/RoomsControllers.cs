@@ -16,7 +16,7 @@ namespace CineMax.API.Controllers
         public RoomsControllers(IMediator mediator)
         {
             _mediator = mediator;
-        }
+        } 
 
         [HttpGet]
         public async Task<IActionResult> GetRoomAndSectionAll()

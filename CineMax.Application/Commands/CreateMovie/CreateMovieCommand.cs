@@ -1,7 +1,6 @@
 ﻿using CineMax.Core.Enums;
 using MediatR;
 
-
 namespace CineMax.Application.Commands.CreateMovie
 {
     public class CreateMovieCommand : IRequest<int>
@@ -12,6 +11,5 @@ namespace CineMax.Application.Commands.CreateMovie
         public string TrailerURL { get; set; }
         public string Duration { get; set; }
         public MovieStatusEnum Status { get; set; }
-
     }
 }

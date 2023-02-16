@@ -17,7 +17,7 @@ namespace CineMax.Core.Entities
         public Room Room { get; private set; }
 
 
-        public Section(string name, string description, DateTime startSection, DateTime endSection, int movieId, int roomId)
+        public Section (string name, string description, DateTime startSection, DateTime endSection, int movieId, int roomId)
         {
             Name = name;
             Description = description;
