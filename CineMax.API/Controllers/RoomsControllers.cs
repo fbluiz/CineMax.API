@@ -1,4 +1,5 @@
-﻿using CineMax.Application.Commands.UpdateRoomCommand;
+﻿using CineMax.Application.Commands.CreateRoom;
+using CineMax.Application.Commands.UpdateRoomCommand;
 using CineMax.Application.Queries.GetAllRoom;
 using CineMax.Application.Queries.GetRoomAndSectionById;
 using MediatR;
@@ -46,6 +47,14 @@ namespace CineMax.API.Controllers
             var roomId = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetRoomAndSectionById), new { id = id }, id);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRoom([FromBody] CreateRoomCommand command)
+        {
+            var id = await _mediator.Send(command);
+
+            return CreatedAtAction(nameof(GetRoomAndSectionById), new { id = id }, command);
         }
     }
 }
