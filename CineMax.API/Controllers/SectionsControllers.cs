@@ -20,6 +20,9 @@ namespace CineMax.API.Controllers
         public async Task<IActionResult> CreateSection([FromBody] CreateSectionCommand command)
         {
             var Section = await _mediator.Send(command);
+           
+            if (Section == null)
+                return BadRequest("A quantidade de tickets não pode ultrapasse a quantidade de cadeiras");
 
             return Ok(Section);
         }

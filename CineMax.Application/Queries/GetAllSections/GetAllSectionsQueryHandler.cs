@@ -25,6 +25,7 @@ namespace CineMax.Application.Queries.GetAllSections
                 NameRoom = s.Room.Name,
                 StartSection = s.StartSection,
                 Status = s.Status.ToString(),
+                MaximumTickets= s.MaximumTickets, 
                 Tickets = s.Tickets.Select(s => new TicketViewModel
                 {
                     Number = s.Id,

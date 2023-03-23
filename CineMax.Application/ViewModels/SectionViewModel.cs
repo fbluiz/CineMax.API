@@ -10,5 +10,6 @@
         public string Status { get; set; }
         public List<TicketViewModel> Tickets { get; set; }
         public string NameRoom { get; set; }
+        public int MaximumTickets { get; set; }
     }
 }

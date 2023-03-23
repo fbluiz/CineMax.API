@@ -6,7 +6,6 @@
         public bool IsRoomOcuped { get; private set; }
         public List<Section> Sections { get; private set; }
         public List<Seat> Seats { get; private set; } 
-
         public Room(string name)
         {
             Name = name;

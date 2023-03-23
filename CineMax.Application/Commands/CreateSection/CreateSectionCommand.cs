@@ -14,5 +14,6 @@ namespace CineMax.Application.Commands.CreateSection
         public SectionStatusEnum Status { get; set; }
         public int MovieId { get; set; }
         public int RoomId { get; set; }
+        public int MaximumTickets { get; set; }
     }
 }

@@ -17,18 +17,14 @@ namespace CineMax.Application.Commands.CreateSection
 
         public async Task<Section> Handle(CreateSectionCommand request, CancellationToken cancellationToken)
         {
-            var section = new Section(request.Name, request.Description, request.StartSection, request.EndSection, request.MovieId, request.RoomId);
+            var section = new Section(request.Name, request.Description, request.StartSection, request.EndSection, request.MovieId, request.RoomId, request.MaximumTickets);
 
             await _sectionRepository.AddAsync(section);
 
             var room = await _roomRepository.GetByIdAsync(r => r.Id == request.RoomId);
-            
-            var ticketsCount = room.Seats.Count();
 
-            for (int i = 1; i <= ticketsCount; i++)
-            {
-                await _sectionRepository.AddNewTicketAsync(section.Id);
-            };
+            if (request.MaximumTickets > room.Seats.Count())
+                return null;
 
             return section;
         }
