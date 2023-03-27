@@ -14,7 +14,7 @@ namespace CineMax.Application.Queries.GetAllSections
 
         public async Task<List<SectionViewModel>> Handle(GetAllSectionsQuery request, CancellationToken cancellationToken)
         {
-            var sections = await _sectionRepository.GetSectionViewModelAsync();
+            var sections = await _sectionRepository.GetSectionViewModelAsync(request.disponible);   
 
             var sectionsViewModel = sections.Select(s => new SectionViewModel
             {

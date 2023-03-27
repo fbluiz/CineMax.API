@@ -1,10 +1,11 @@
-﻿using CineMax.Core.Entities;
+﻿using CineMax.Application.ViewModels;
+using CineMax.Core.Entities;
 using CineMax.Core.Enums;
 using MediatR;
 
 namespace CineMax.Application.Commands.CreateSection
 {
-    public class CreateSectionCommand : IRequest<Section>
+    public class CreateSectionCommand : IRequest<SectionViewModel>
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -16,8 +16,16 @@ namespace CineMax.Application.Commands.CreateRoom
         public async Task<int> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
         {
             var room = new Room(request.Name);
-            
             await _roomRepository.AddAsync(room);
+
+            for (int i = 1; i <= request.QuantitySeats; i++)
+            {
+                var position = "Seat " + i;
+                var seat = new Seat(position, room.Id);
+
+                room.Seats.Add(seat);
+                await _roomRepository.AddSeatAsync(seat);
+            }
 
             return room.Id;
         }

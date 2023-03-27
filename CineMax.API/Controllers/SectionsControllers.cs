@@ -19,17 +19,16 @@ namespace CineMax.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSection([FromBody] CreateSectionCommand command)
         {
-            var Section = await _mediator.Send(command);
+            var sectionViewModel = await _mediator.Send(command);
            
-            if (Section == null)
-                return BadRequest("A quantidade de tickets não pode ultrapasse a quantidade de cadeiras");
+            if (sectionViewModel == null)
+                return BadRequest("The number of tickets cannot exceed the number of chairs.");
 
-            return Ok(Section);
+            return Ok(sectionViewModel);
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllSections()
+        public async Task<IActionResult> GetAllSections([FromQuery] GetAllSectionsQuery query)
         {
-            var query = new GetAllSectionsQuery();
             var sections = await _mediator.Send(query);
 
             return Ok(sections);
