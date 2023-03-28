@@ -7,18 +7,21 @@ namespace CineMax.Application.Queries.GetSectionById
     public class GetSectionByIdQueryHandler : IRequestHandler<GetSectionByIdQuery, SectionViewModel>
     {
         private readonly ISectionRepository _sectionRepository;
-
-        public GetSectionByIdQueryHandler(ISectionRepository sectionRepository)
+        private readonly IRoomRepository _roomRepository;
+        public GetSectionByIdQueryHandler(ISectionRepository sectionRepository, IRoomRepository rooRepository)
         {
             _sectionRepository = sectionRepository;
+            _roomRepository = rooRepository;
         }
 
         public async Task<SectionViewModel> Handle(GetSectionByIdQuery request, CancellationToken cancellationToken)
         {
             var section = await _sectionRepository.GetByIdAsync(s => s.Id == request.Id);
 
-            if (section == null)
+            if (section == null) 
                 return null;
+
+            var roomName = (await _roomRepository.GetByIdAsync(r => r.Id == section.RoomId)).Name;
 
             var ticketsViewModel = section.Tickets.Select(t => new TicketViewModel
             {
@@ -35,7 +38,7 @@ namespace CineMax.Application.Queries.GetSectionById
                 EndSection = section.EndSection,
                 MaximumTickets= section.MaximumTickets,
                 Name= section.Name,
-                NameRoom = section.Room.Name,
+                NameRoom = roomName,
                 StartSection= section.StartSection,
                 Status = section.Status.ToString(),
                 Tickets = ticketsViewModel
