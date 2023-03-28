@@ -31,5 +31,10 @@ namespace CineMax.Infra.Persistence.Repositories
             //{
             //    return await _dbContext.Sections.Include(s => s.Tickets).Include(s => s.Room).ToListAsync();
         }
+        public async Task UpdateSectionAsync(Section section)
+        {
+            _dbContext.Update(section);
+            await SaveChangesAsync();
+        }
       }
     }

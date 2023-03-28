@@ -32,6 +32,17 @@ namespace CineMax.Core.Entities
             MaximumTickets = maximumTickets;
         }
 
+        public void Update(string? name, string? description, DateTime? startSection, DateTime? endSection, SectionStatusEnum? status, int? roomId, int? maximumTickets)
+        {
+            Name = name ?? Name;
+            Description = description ?? Description;
+            StartSection = startSection ?? StartSection;
+            EndSection = endSection ?? EndSection;
+            Status = status ?? Status;
+            RoomId = roomId ?? RoomId;
+            MaximumTickets = maximumTickets ?? MaximumTickets;
+        }
+
         public void Progress()
         {
             if (Status == SectionStatusEnum.Created)

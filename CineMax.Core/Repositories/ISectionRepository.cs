@@ -6,5 +6,6 @@ namespace CineMax.Core.Repositories
     {
         Task AddNewTicketAsync(int idSection);
         Task<List<Section>> GetSectionViewModelAsync(bool? disponible = false);
+        Task UpdateSectionAsync(Section section);
     }
 }
