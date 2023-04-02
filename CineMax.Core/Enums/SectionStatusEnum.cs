@@ -5,6 +5,6 @@
         Inprogress = 0,
         End = 1,
         Created = 2,
-        Canceled = 3
+        Canceled = 3 // delete
     }
 }

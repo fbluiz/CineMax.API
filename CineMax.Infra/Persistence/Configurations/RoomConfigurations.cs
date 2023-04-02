@@ -16,7 +16,6 @@ namespace CineMax.Infra.Persistence.Configurations
                .WithOne(s => s.Room)
                .HasForeignKey(s => s.RoomId)
                .OnDelete(DeleteBehavior.Restrict);
-
             builder
                 .HasMany(r => r.Seats)
                 .WithOne(s => s.Room)

@@ -14,7 +14,7 @@ namespace CineMax.Application.Commands.UpdateMovie
 
         public async Task<Unit> Handle(UpdateMovieCommand request, CancellationToken cancellationToken)
         {
-          var movie = await _movieRepository.GetByIdAsync(m => m.Id == request.Id);
+          var movie = await _movieRepository.GetByIdAsync(m => m.Id == request.Id && (m.Removed == false || m.Removed == null));
           var duration = TimeSpan.Parse(request.Duration);
 
             

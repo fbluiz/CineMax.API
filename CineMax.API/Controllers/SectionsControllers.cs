@@ -1,6 +1,5 @@
 ﻿using CineMax.Application.Commands.CreateSection;
 using CineMax.Application.Commands.UpdateSection;
-using CineMax.Application.Queries.GetAllRoom;
 using CineMax.Application.Queries.GetAllSections;
 using CineMax.Application.Queries.GetSectionById;
 using MediatR;
@@ -37,7 +36,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdSections([FromRoute] int id)
+        public async Task<IActionResult> GetByIdSections(int id)
         {
             var query = new GetSectionByIdQuery
             {
@@ -53,15 +52,16 @@ namespace CineMax.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSection([FromRoute] int id, [FromBody] UpdateSectionCommand command) 
+        public async Task<IActionResult> UpdateSection([FromRoute] int id, [FromBody] UpdateSectionCommand command)
         {
             if (id != command.Id)
                 return BadRequest("O id da rota é diferente do id fornecido");
 
             var sectionId = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetByIdSections), new { id = id }, command);
-        }
+            var sectionViewModel = await GetByIdSections(sectionId);
 
+            return CreatedAtAction(nameof(GetByIdSections), new { id = sectionId }, command);
+        }
     }
 }

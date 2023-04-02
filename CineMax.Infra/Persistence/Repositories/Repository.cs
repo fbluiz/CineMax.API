@@ -1,5 +1,6 @@
 ﻿using CineMax.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace CineMax.Infra.Persistence.Repositories
 {
@@ -26,13 +27,13 @@ namespace CineMax.Infra.Persistence.Repositories
 
         public async Task<List<T>> GetAsync()
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await _dbContext.Set<T>().ToListAsync(); 
         }
 
-        public async Task<T> GetByIdAsync(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
+        public async Task<T> GetByIdAsync(Expression<Func<T, bool>> predicate)
         {
             return await _dbContext.Set<T>().AsNoTracking().SingleOrDefaultAsync(predicate);
-        }
+        }   
 
         public async Task SaveChangesAsync()
         {

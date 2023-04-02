@@ -14,7 +14,7 @@ namespace CineMax.Application.Queries.GetAllMovies
         }
         public async Task<List<MovieViewModel>> Handle(GetAllMoviesQuery request, CancellationToken cancellationToken)
         {
-            var movies = await _movieRepository.GetAsync();
+            var movies = (await _movieRepository.GetAsync()).Where(m => m.Removed == false || m.Removed == null);
 
             var moviesViewModel = movies.Select(m => new MovieViewModel { Title = m.Title, Description = m.Description, Duration = m.Duration.ToString(), ImageURL = m.ImageURL, Status = m.Status, TrailerURL = m.TrailerURL }).ToList();
 

@@ -1,11 +1,6 @@
 ﻿using CineMax.Application.ViewModels;
 using CineMax.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CineMax.Application.Queries.GetMovieById
 {
@@ -20,7 +15,7 @@ namespace CineMax.Application.Queries.GetMovieById
 
         public async Task<MovieViewModel> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
         {
-            var movie = await _movieRepository.GetByIdAsync(m => m.Id == request.Id);
+            var movie = await _movieRepository.GetByIdAsync(m => m.Id == request.Id && (m.Removed == false || m.Removed == null));
 
             if (movie == null)
                 return null;

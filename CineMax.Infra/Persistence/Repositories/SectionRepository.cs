@@ -18,7 +18,7 @@ namespace CineMax.Infra.Persistence.Repositories
         public async Task<List<Section>> GetSectionViewModelAsync(bool? disponible)
         {
             return await _dbContext.Sections
-                .Where(s => disponible != true || s.Status == SectionStatusEnum.Created)
+                .Where(s => disponible != true && (s.Removed == false || s.Removed == null) || s.Status == SectionStatusEnum.Created && (s.Removed == false || s.Removed == null))
                 .Include(s => s.Tickets)
                 .Include(s => s.Room)
                 .ToListAsync();

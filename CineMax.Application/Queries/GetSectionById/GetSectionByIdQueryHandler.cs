@@ -16,12 +16,12 @@ namespace CineMax.Application.Queries.GetSectionById
 
         public async Task<SectionViewModel> Handle(GetSectionByIdQuery request, CancellationToken cancellationToken)
         {
-            var section = await _sectionRepository.GetByIdAsync(s => s.Id == request.Id);
+            var section = await _sectionRepository.GetByIdAsync(s => s.Id == request.Id && (s.Removed == false || s.Removed == null));
 
             if (section == null) 
                 return null;
 
-            var roomName = (await _roomRepository.GetByIdAsync(r => r.Id == section.RoomId)).Name;
+            var roomName = (await _roomRepository.GetByIdAsync(r => r.Id == request.Id && (r.Removed == false || r.Removed == null))).Name;
 
             var ticketsViewModel = section.Tickets.Select(t => new TicketViewModel
             {

@@ -15,7 +15,7 @@ namespace CineMax.Application.Commands.UpdateSection
 
         public async Task<int> Handle(UpdateSectionCommand request, CancellationToken cancellationToken)
         {
-            var section = await _sectionRepository.GetByIdAsync(s => s.Id == request.Id);
+            var section = await _sectionRepository.GetByIdAsync(s => s.Id == request.Id && (s.Removed == false || s.Removed == null));
             
             section.Update(request.Name, request.Description, request.StartSection, request.EndSection, request.Status, request.RoomId, request.MaximumTickets);
             

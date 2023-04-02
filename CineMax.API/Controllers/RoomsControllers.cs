@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CineMax.API.Controllers
 {
-    //teste
     [Route("api/rooms")]
     public class RoomsControllers : ControllerBase
     {
@@ -46,7 +45,7 @@ namespace CineMax.API.Controllers
         {
             var roomId = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetRoomAndSectionById), new { id = id }, id);
+            return CreatedAtAction(nameof(GetRoomAndSectionById), new { id = id }, command);
         }
 
         [HttpPost]

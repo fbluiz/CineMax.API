@@ -8,7 +8,6 @@ namespace CineMax.Infra.Persistence.Repositories
     {
         public MovieRepository(ICineMaxDbContext dbContext) : base(dbContext)
         {
-
         }
     }
 }
