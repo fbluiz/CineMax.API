@@ -1,4 +1,5 @@
 ﻿using CineMax.Application.Commands.CreateMovie;
+using CineMax.Application.Commands.DeleteMovieCommand;
 using CineMax.Application.Commands.UpdateMovie;
 using CineMax.Application.Queries.GetAllMovies;
 using CineMax.Application.Queries.GetMovieById;
@@ -55,6 +56,17 @@ namespace CineMax.API.Controllers
             await _mediator.Send(command);
 
             if (command == null) return BadRequest("Erro no tilinha");
+
+            return Ok("Atualização feita com sucesso!");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteMovieCommand command)
+        {
+            if (command.Id != id)
+                return BadRequest("O Id da rota é diferente do Id fornecido.");
+
+            await _mediator.Send(command);
 
             return Ok("Atualização feita com sucesso!");
         }

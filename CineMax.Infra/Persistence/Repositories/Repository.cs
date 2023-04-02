@@ -21,7 +21,8 @@ namespace CineMax.Infra.Persistence.Repositories
 
         public async Task DeleteAsync(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+            _dbContext.Update(entity);
+            
             await SaveChangesAsync();
         }
 
