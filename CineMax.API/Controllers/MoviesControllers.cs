@@ -37,7 +37,7 @@ namespace CineMax.API.Controllers
             var movie = await _mediator.Send(query);
 
             if (movie == null)
-                return BadRequest("Filme não encontrado na nossa base de dados");
+                return BadRequest("Film not found in our database.");
 
             return Ok(movie);
         }
@@ -55,20 +55,21 @@ namespace CineMax.API.Controllers
         {
             await _mediator.Send(command);
 
-            if (command == null) return BadRequest("Erro no tilinha");
+            if (command == null) 
+                return BadRequest("There was an error trying to update the content.");
 
-            return Ok("Atualização feita com sucesso!");
+            return Ok("Update done successfully!");
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteMovieCommand command)
+        public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteSectionCommand command)
         {
             if (command.Id != id)
-                return BadRequest("O Id da rota é diferente do Id fornecido.");
+                return BadRequest("The route id is different from the given id.");
 
             await _mediator.Send(command);
 
-            return Ok("Atualização feita com sucesso!");
+            return Ok("Update done successfully!");
         }
 
     }

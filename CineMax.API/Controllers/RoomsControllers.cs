@@ -1,4 +1,6 @@
 ﻿using CineMax.Application.Commands.CreateRoom;
+using CineMax.Application.Commands.DeleteMovieCommand;
+using CineMax.Application.Commands.DeleteRoom;
 using CineMax.Application.Commands.UpdateRoomCommand;
 using CineMax.Application.Queries.GetAllRoom;
 using CineMax.Application.Queries.GetRoomAndSectionById;
@@ -35,7 +37,7 @@ namespace CineMax.API.Controllers
             var roomAndSection = await _mediator.Send(query);
 
             if (roomAndSection == null)
-                return BadRequest("Sala não encontrada na nossa base de dados ");
+                return BadRequest("Room not found in our database.");
 
             return Ok(roomAndSection);
         }
@@ -54,6 +56,17 @@ namespace CineMax.API.Controllers
             var id = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetRoomAndSectionById), new { id = id }, command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteRoomCommand command)
+        {
+            if (command.Id != id)
+                return BadRequest("The route id is different from the given id.");
+
+            await _mediator.Send(command);
+
+            return Ok("Update done successfully!");
         }
     }
 }

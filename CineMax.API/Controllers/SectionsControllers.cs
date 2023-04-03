@@ -1,4 +1,6 @@
 ﻿using CineMax.Application.Commands.CreateSection;
+using CineMax.Application.Commands.DeleteMovieCommand;
+using CineMax.Application.Commands.DeleteRoom;
 using CineMax.Application.Commands.UpdateSection;
 using CineMax.Application.Queries.GetAllSections;
 using CineMax.Application.Queries.GetSectionById;
@@ -55,13 +57,24 @@ namespace CineMax.API.Controllers
         public async Task<IActionResult> UpdateSection([FromRoute] int id, [FromBody] UpdateSectionCommand command)
         {
             if (id != command.Id)
-                return BadRequest("O id da rota é diferente do id fornecido");
+                return BadRequest("The route id is different from the given id.");
 
             var sectionId = await _mediator.Send(command);
 
             var sectionViewModel = await GetByIdSections(sectionId);
 
             return CreatedAtAction(nameof(GetByIdSections), new { id = sectionId }, command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteSectionCommand command)
+        {
+            if (command.Id != id)
+                return BadRequest("The route id is different from the given id.");
+
+            await _mediator.Send(command);
+
+            return Ok("Update done successfully!");
         }
     }
 }

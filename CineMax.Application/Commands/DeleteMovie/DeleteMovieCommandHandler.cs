@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CineMax.Application.Commands.DeleteMovieCommand
 {
-    public class DeleteMovieCommandHandler : IRequestHandler<DeleteMovieCommand,Unit>
+    public class DeleteMovieCommandHandler : IRequestHandler<DeleteMovieCommand, Unit>
     {
         private readonly IMovieRepository _movieRepository;
 
