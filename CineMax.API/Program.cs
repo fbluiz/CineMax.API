@@ -1,11 +1,14 @@
+using CineMax.API.Extensions;
 using CineMax.Application.Commands.CreateUser;
 using CineMax.Core.Repositories;
+using CineMax.Core.Services.Auth;
+using CineMax.Infra.Auth;
 using CineMax.Infra.Auth.Data;
 using CineMax.Infra.Persistence;
 using CineMax.Infra.Persistence.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,23 +18,26 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddAuthentication(builder.Configuration);
 
 
 var connectionString = builder.Configuration.GetConnectionString("CineMaxCsVini");
 // ATENÇÃO! Alterar a referência da string de conexão
 builder.Services.AddDbContext<ICineMaxDbContext>(options => options
 .UseSqlServer(connectionString));
-
 builder.Services.AddDbContext<IdentityDataContext>(options =>
     options.UseSqlServer(connectionString));
 
 
-//MediatR utiliza o assembly para mapear todos os outros com a interfarce iRequest e iRequestHandler
 builder.Services.AddMediatR(typeof(CreateUserCommand));
 
-//Mapeamento padrão repository
-builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<IdentityDataContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();        
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 
