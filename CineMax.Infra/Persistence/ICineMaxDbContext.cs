@@ -11,8 +11,6 @@ namespace CineMax.Infra.Persistence
 {
     public class ICineMaxDbContext : DbContext
     {
-        //Classe que são criadas as tabelas e passadas por EntityFramework
-        //Baixar os pacotes nuget Ef Core tools, Ef Core Design, Ef Core SQL
         public ICineMaxDbContext(DbContextOptions<ICineMaxDbContext> options) : base(options)
         {
 
