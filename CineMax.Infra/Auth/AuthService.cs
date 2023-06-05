@@ -27,8 +27,8 @@ namespace CineMax.Infra.Auth
         public async Task<UserLoginResponse> Login(UserLoginRequest userLogin)
         {
             var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Senha, false, true);
-            //if (result.Succeeded)
-            //    return await GerarToken(userLogin.Email);
+            if (result.Succeeded)
+                return await GenerateToken(userLogin.Email);
 
             var usuarioLoginResponse = new UserLoginResponse(result.Succeeded);
             if(!result.Succeeded)

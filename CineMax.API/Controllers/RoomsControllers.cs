@@ -1,5 +1,4 @@
 ﻿using CineMax.Application.Commands.CreateRoom;
-using CineMax.Application.Commands.DeleteMovieCommand;
 using CineMax.Application.Commands.DeleteRoom;
 using CineMax.Application.Commands.UpdateRoomCommand;
 using CineMax.Application.Queries.GetAllRoom;

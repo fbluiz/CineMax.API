@@ -9,6 +9,9 @@ using CineMax.Infra.Persistence.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +20,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 builder.Services.AddAuthentication(builder.Configuration);
 
+builder.Services.AddSwaggerGen(c =>
+{
+    // Configurar o Swagger
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "CineMax.API", Version = "v1" });
 
-var connectionString = builder.Configuration.GetConnectionString("CineMaxCsVini");
+    // Adicionar suporte para autenticação com token
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer"
+    });
+    c.OperationFilter<SecurityRequirementsOperationFilter>();
+});
+
+var connectionString = builder.Configuration.GetConnectionString("CineMaxCsFb");
 // ATENÇÃO! Alterar a referência da string de conexão
 builder.Services.AddDbContext<ICineMaxDbContext>(options => options
 .UseSqlServer(connectionString));
@@ -37,20 +54,23 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();        
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
