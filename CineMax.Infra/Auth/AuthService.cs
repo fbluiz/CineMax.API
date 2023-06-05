@@ -59,7 +59,12 @@ namespace CineMax.Infra.Auth
             if (result.Succeeded)
                 await _userManager.SetLockoutEnabledAsync(identityUser, false);
 
-            var usuarioCadastroResponse = new RegisterUserResponse(result.Succeeded);
+            // Verifique se a propriedade "Role" está definida na classe RegisterUserRequest
+            if (!string.IsNullOrEmpty(registerUser.Role))         
+                // Adicione a role ao usuário criado
+                await _userManager.AddToRoleAsync(identityUser, registerUser.Role);
+
+                var usuarioCadastroResponse = new RegisterUserResponse(result.Succeeded);
             if (!result.Succeeded && result.Errors.Count() > 0)
                 usuarioCadastroResponse.AddErros(result.Errors.Select(r => r.Description));
            

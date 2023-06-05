@@ -1,5 +1,6 @@
 ﻿using CineMax.Infra.Auth.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -57,5 +58,11 @@ namespace CineMax.API.Extensions
                 options.TokenValidationParameters = tokenValidationParameters;
             });
         }
+
+        //Adicionar politicas
+        //public static void AddAuthorizationPolicies(this IServiceCollection services)
+        //{
+
+        //}
     }
 }
