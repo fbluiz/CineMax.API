@@ -4,7 +4,9 @@ using CineMax.Application.Commands.DeleteRoom;
 using CineMax.Application.Commands.UpdateSection;
 using CineMax.Application.Queries.GetAllSections;
 using CineMax.Application.Queries.GetSectionById;
+using CineMax.Infra.Auth.Constants;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CineMax.API.Controllers
@@ -20,6 +22,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> CreateSection([FromBody] CreateSectionCommand command)
         {
             var sectionViewModel = await _mediator.Send(command);
@@ -54,6 +57,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> UpdateSection([FromRoute] int id, [FromBody] UpdateSectionCommand command)
         {
             if (id != command.Id)
@@ -67,6 +71,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteSectionCommand command)
         {
             if (command.Id != id)

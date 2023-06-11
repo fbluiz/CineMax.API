@@ -3,12 +3,15 @@ using CineMax.Application.Commands.DeleteRoom;
 using CineMax.Application.Commands.UpdateRoomCommand;
 using CineMax.Application.Queries.GetAllRoom;
 using CineMax.Application.Queries.GetRoomAndSectionById;
+using CineMax.Infra.Auth.Constants;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CineMax.API.Controllers
 {
     [Route("api/rooms")]
+    [Authorize]
     public class RoomsControllers : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -42,6 +45,8 @@ namespace CineMax.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = Roles.Admin)]
+
         public async Task<IActionResult> UpdateRoom([FromRoute]int id, [FromBody] UpdateRoomCommand command)
         {
             var roomId = await _mediator.Send(command);
@@ -50,6 +55,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> CreateRoom([FromBody] CreateRoomCommand command)
         {
             var id = await _mediator.Send(command);
@@ -58,6 +64,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteRoomCommand command)
         {
             if (command.Id != id)

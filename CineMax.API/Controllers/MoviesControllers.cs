@@ -3,6 +3,7 @@ using CineMax.Application.Commands.DeleteMovieCommand;
 using CineMax.Application.Commands.UpdateMovie;
 using CineMax.Application.Queries.GetAllMovies;
 using CineMax.Application.Queries.GetMovieById;
+using CineMax.Infra.Auth.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CineMax.API.Controllers
 {
     [Route("api/movies")]
+    [Authorize]
     public class MoviesControllers : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -30,7 +32,6 @@ namespace CineMax.API.Controllers
         }
 
         [HttpGet("{id})")]
-        [Authorize(Roles = "ClientBasic")]
         public async Task<IActionResult> GetById(int id)
         {
             var query = new GetMovieByIdQuery(id);
@@ -44,6 +45,8 @@ namespace CineMax.API.Controllers
         }
 
         [HttpPost]
+        [Authorize (Roles = Roles.Admin)]
+
         public async Task<IActionResult> Post([FromBody] CreateMovieCommand commannd)
         {
             var id = await _mediator.Send(commannd);
@@ -52,6 +55,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpPut("{id})")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] UpdateMovieCommand command)
         {
             await _mediator.Send(command);
@@ -63,6 +67,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteSectionCommand command)
         {
             if (command.Id != id)

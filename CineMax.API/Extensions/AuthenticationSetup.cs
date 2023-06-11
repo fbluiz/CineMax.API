@@ -1,17 +1,14 @@
 ﻿using CineMax.Infra.Auth.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
+    using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace CineMax.API.Extensions
 {
     public static class AuthenticationSetup
     {
-        public static void AddAuthentication (this IServiceCollection services, IConfiguration configuration)
+        public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtAppSettingOptions = configuration.GetSection(nameof(JwtOptions));
             var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration.GetSection("JwtOptions:SecurityKey").Value));
@@ -39,30 +36,25 @@ namespace CineMax.API.Extensions
                 ValidIssuer = configuration.GetSection("JwtOptions:Issuer").Value,
 
                 ValidateAudience = true,
-                ValidAudience = configuration.GetSection("JwtOption:Audience").Value,
+                ValidAudience = configuration.GetSection("JwtOptions:Audience").Value,
 
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = securityKey,
 
+                RequireExpirationTime = true,
+                ValidateLifetime = true,
+
                 ClockSkew = TimeSpan.Zero
             };
-
 
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
             }).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = tokenValidationParameters;
             });
         }
-
-        //Adicionar politicas
-        //public static void AddAuthorizationPolicies(this IServiceCollection services)
-        //{
-
-        //}
     }
 }
