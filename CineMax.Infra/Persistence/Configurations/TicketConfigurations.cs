@@ -12,9 +12,9 @@ namespace CineMax.Infra.Persistence.Configurations
             .HasKey(s => s.Id);
 
             builder
-                .HasOne(t => t.User)
+                .HasOne(t => t.Client)
                 .WithMany(u => u.MyTickets)
-                .HasForeignKey(t => t.UserId)
+                .HasForeignKey(t => t.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder

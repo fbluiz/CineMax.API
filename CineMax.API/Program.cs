@@ -55,7 +55,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddScoped<IMovieRepository, MovieRepository>();        
+builder.Services.AddScoped<IMovieRepository, MovieRepository>(); 
+builder.Services.AddScoped<IClientRepository, ClientRepository>();  
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 

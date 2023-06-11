@@ -13,5 +13,7 @@ namespace CineMax.Core.DTOs.AuthDTOs.Requests
         [Compare(nameof(Password), ErrorMessage = "As senhas devem ser iguais")]
         public string PasswordConfirmation { get; set; }
         public string Role { get; set; }
+        public string Name { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

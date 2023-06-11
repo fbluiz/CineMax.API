@@ -8,10 +8,10 @@ namespace CineMax.Core.Entities
         public TicketStatusEnum Status { get; private set; }
         public int SectionId { get; private set; }
         public int SeatId { get; set; }
-        public int UserId { get; private set; }
+        public int ClientId { get; private set; }
         public Section Section { get; private set; }
         public Seat Seat { get; private set; }
-        public User User { get; private set; }
+        public Client Client { get; private set; }
 
         public Ticket(int sectionId)
         {

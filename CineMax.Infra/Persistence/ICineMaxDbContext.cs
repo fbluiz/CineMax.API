@@ -1,11 +1,6 @@
 ﻿using CineMax.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CineMax.Infra.Persistence
 {
@@ -15,7 +10,7 @@ namespace CineMax.Infra.Persistence
         {
 
         }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Seat> Seats { get; set; }

@@ -2,9 +2,7 @@
 
 namespace CineMax.Core.Repositories
 {
-    public interface IUserRepository
+    public interface IClientRepository : IRepository<Client>
     {
-       
-
     }
 }

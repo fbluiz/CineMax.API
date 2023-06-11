@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace CineMax.Core.DTOs.AuthDTOs.Responses
 {
     public class RegisterUserResponse
     {
         public bool Success { get; private set; }
-        public List<String> Erros { get; set; }
+        public List<string> Erros { get; set; }
+        [JsonIgnore]
+        public string Role { get; set; }
+        [JsonIgnore]
+        public Guid UserId { get; set; }
 
-        public RegisterUserResponse() => 
-            Erros = new List<String>(); 
-
-        public RegisterUserResponse(bool sucess = true) : this() =>
-            Success = sucess;
+        public RegisterUserResponse(bool success, string role, Guid userId)
+        {
+            Success = success;
+            Role = role;
+            UserId = userId;
+            Erros= new List<string>();
+        }
 
         public void AddErros (IEnumerable<string> erros) =>
             Erros.AddRange(erros);

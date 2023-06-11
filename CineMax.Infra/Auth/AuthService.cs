@@ -26,9 +26,9 @@ namespace CineMax.Infra.Auth
 
         public async Task<UserLoginResponse> Login(UserLoginRequest userLogin)
         {
-            var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Senha, false, true);
+            var result = await _signInManager.PasswordSignInAsync(userLogin.UserName, userLogin.Senha, false, true);
             if (result.Succeeded)
-                return await GenerateToken(userLogin.Email);
+                return await GenerateToken(userLogin.UserName);
 
             var usuarioLoginResponse = new UserLoginResponse(result.Succeeded);
             if(!result.Succeeded)
@@ -50,30 +50,30 @@ namespace CineMax.Infra.Auth
         {
             var identityUser = new IdentityUser
             {
-                UserName = registerUser.Email,
+                UserName = registerUser.Name,
                 Email = registerUser.Email,
                 EmailConfirmed = true
             };
 
             var result = await _userManager.CreateAsync(identityUser, registerUser.Password);
             if (result.Succeeded)
+            {
                 await _userManager.SetLockoutEnabledAsync(identityUser, false);
+                // Verifique se a propriedade "Role" está definida na classe RegisterUserRequest
+                if (!string.IsNullOrEmpty(registerUser.Role))
+                    await _userManager.AddToRoleAsync(identityUser, registerUser.Role);
+            }
 
-            // Verifique se a propriedade "Role" está definida na classe RegisterUserRequest
-            if (!string.IsNullOrEmpty(registerUser.Role))         
-                // Adicione a role ao usuário criado
-                await _userManager.AddToRoleAsync(identityUser, registerUser.Role);
-
-                var usuarioCadastroResponse = new RegisterUserResponse(result.Succeeded);
+            var usuarioCadastroResponse = new RegisterUserResponse(success:result.Succeeded,role: registerUser.Role,userId: Guid.Parse(identityUser.Id));
             if (!result.Succeeded && result.Errors.Count() > 0)
                 usuarioCadastroResponse.AddErros(result.Errors.Select(r => r.Description));
            
             return usuarioCadastroResponse; 
         }
 
-        public async Task<UserLoginResponse> GenerateToken (string email)
+        public async Task<UserLoginResponse> GenerateToken (string userName)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByNameAsync(userName);
             var tokenClaims = await GetClaims(user);
 
             var dataExpiracao = DateTime.Now.AddSeconds(_jwtOptions.Expiration);

@@ -4,7 +4,6 @@ using CineMax.Infra.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,11 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CineMax.Infra.Migrations
 {
     [DbContext(typeof(ICineMaxDbContext))]
-    [Migration("20230116043556_correcao")]
-    partial class correcao
+    partial class ICineMaxDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +21,43 @@ namespace CineMax.Infra.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CineMax.Core.Entities.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Removed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemovedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
 
             modelBuilder.Entity("CineMax.Core.Entities.Movie", b =>
                 {
@@ -37,15 +71,22 @@ namespace CineMax.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Duration")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
 
                     b.Property<string>("ImageURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Removed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemovedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -75,6 +116,12 @@ namespace CineMax.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("Removed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemovedOn")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
@@ -92,11 +139,18 @@ namespace CineMax.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("Removed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemovedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -123,6 +177,9 @@ namespace CineMax.Infra.Migrations
                     b.Property<DateTime>("EndSection")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MaximumTickets")
+                        .HasColumnType("int");
+
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
@@ -130,14 +187,21 @@ namespace CineMax.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("Removed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemovedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartSection")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -156,7 +220,16 @@ namespace CineMax.Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Removed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemovedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("SeatId")
@@ -165,53 +238,19 @@ namespace CineMax.Infra.Migrations
                     b.Property<int>("SectionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("SeatId");
 
                     b.HasIndex("SectionId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Tickets");
-                });
-
-            modelBuilder.Entity("CineMax.Core.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CineMax.Core.Entities.Seat", b =>
@@ -246,6 +285,12 @@ namespace CineMax.Infra.Migrations
 
             modelBuilder.Entity("CineMax.Core.Entities.Ticket", b =>
                 {
+                    b.HasOne("CineMax.Core.Entities.Client", "Client")
+                        .WithMany("MyTickets")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("CineMax.Core.Entities.Seat", "Seat")
                         .WithMany()
                         .HasForeignKey("SeatId")
@@ -258,17 +303,16 @@ namespace CineMax.Infra.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CineMax.Core.Entities.User", "User")
-                        .WithMany("MyTickets")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Navigation("Client");
 
                     b.Navigation("Seat");
 
                     b.Navigation("Section");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("CineMax.Core.Entities.Client", b =>
+                {
+                    b.Navigation("MyTickets");
                 });
 
             modelBuilder.Entity("CineMax.Core.Entities.Movie", b =>
@@ -286,11 +330,6 @@ namespace CineMax.Infra.Migrations
             modelBuilder.Entity("CineMax.Core.Entities.Section", b =>
                 {
                     b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("CineMax.Core.Entities.User", b =>
-                {
-                    b.Navigation("MyTickets");
                 });
 #pragma warning restore 612, 618
         }

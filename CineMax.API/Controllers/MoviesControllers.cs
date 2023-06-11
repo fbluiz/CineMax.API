@@ -3,8 +3,8 @@ using CineMax.Application.Commands.DeleteMovieCommand;
 using CineMax.Application.Commands.UpdateMovie;
 using CineMax.Application.Queries.GetAllMovies;
 using CineMax.Application.Queries.GetMovieById;
-using CineMax.Application.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CineMax.API.Controllers
@@ -30,6 +30,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpGet("{id})")]
+        [Authorize(Roles = "ClientBasic")]
         public async Task<IActionResult> GetById(int id)
         {
             var query = new GetMovieByIdQuery(id);
@@ -74,4 +75,3 @@ namespace CineMax.API.Controllers
 
     }
 }
-
