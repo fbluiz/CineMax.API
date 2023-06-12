@@ -1,5 +1,6 @@
 using CineMax.API.Extensions;
 using CineMax.Application.Commands.CreateUser;
+using CineMax.Core.Entities;
 using CineMax.Core.Repositories;
 using CineMax.Core.Services.Auth;
 using CineMax.Infra.Auth;
@@ -47,6 +48,7 @@ builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();  
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+builder.Services.AddScoped<ISectionSeatRepository, SectionSeatRepository>();
 
 var app = builder.Build();
 

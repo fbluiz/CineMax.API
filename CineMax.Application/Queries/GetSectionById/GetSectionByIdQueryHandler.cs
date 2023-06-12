@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CineMax.Application.Queries.GetSectionById
 {
-    public class GetSectionByIdQueryHandler : IRequestHandler<GetSectionByIdQuery, SectionViewModel>
+    public class GetSectionByIdQueryHandler : IRequestHandler<GetSectionByIdQuery, GetSectionViewModel>
     {
         private readonly ISectionRepository _sectionRepository;
         private readonly IRoomRepository _roomRepository;
@@ -14,37 +14,35 @@ namespace CineMax.Application.Queries.GetSectionById
             _roomRepository = rooRepository;
         }
 
-        public async Task<SectionViewModel> Handle(GetSectionByIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetSectionViewModel> Handle(GetSectionByIdQuery request, CancellationToken cancellationToken)
         {
-            var section = await _sectionRepository.GetByIdAsync(s => s.Id == request.Id && (s.Removed == false || s.Removed == null));
+            var section = await _sectionRepository.GetSectionViewModelByIdAsync(request.Id);
 
             if (section == null) 
                 return null;
 
-            var roomName = (await _roomRepository.GetByIdAsync(r => r.Id == request.Id && (r.Removed == false || r.Removed == null))).Name;
+            var sectionSeat = await _roomRepository.GetSeatsStatusBySection(section.Id);
 
-            var ticketsViewModel = section.Tickets.Select(t => new TicketViewModel
+            var seatsViewModel = sectionSeat.Select(s => new SeatViewModel
             {
-                Number = t.Id,
-                SeatPosition = t.Seat.Position,
-                Status = t.Status.ToString(),
+                Position = s.Position,
+                Status = s.IsDisponible ? "Disponible" : "Ocuped"
             }).ToList();
 
-
-            var SectionViewModel = new SectionViewModel
+            GetSectionViewModel sectionViewModel = new GetSectionViewModel
             {
                 CreatedOn = section.CreatedOn,
-                Description= section.Description,
+                Description = section.Description,
                 EndSection = section.EndSection,
-                MaximumTickets= section.MaximumTickets,
-                Name= section.Name,
-                NameRoom = roomName,
-                StartSection= section.StartSection,
+                Name = section.Name,
+                NameRoom = section.Room.Name,
+                StartSection = section.StartSection,
                 Status = section.Status.ToString(),
-                Tickets = ticketsViewModel
+                TicketDisponibles = section.TickestDisponible,
+                Seats = seatsViewModel
             };
 
-            return SectionViewModel;
+            return sectionViewModel;
         }
     }
 }

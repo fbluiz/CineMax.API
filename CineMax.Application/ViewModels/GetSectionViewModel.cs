@@ -1,8 +1,8 @@
-﻿using CineMax.Core.Entities;
+﻿
 
 namespace CineMax.Application.ViewModels
 {
-    public class SectionViewModel
+    public class GetSectionViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -11,7 +11,7 @@ namespace CineMax.Application.ViewModels
         public DateTime CreatedOn { get; set; }
         public string Status { get; set; }
         public string NameRoom { get; set; }
-        public string SeatsDisponible { get; set; }
+        public List<SeatViewModel> Seats { get; set; }
         public int TicketDisponibles { get; set; }
     }
 }

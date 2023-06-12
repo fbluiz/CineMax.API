@@ -4,37 +4,48 @@ using MediatR;
 
 namespace CineMax.Application.Queries.GetAllSections
 {
-    public class GetAllSectionsQueryHandler : IRequestHandler<GetAllSectionsQuery, List<SectionViewModel>>
+    public class GetAllSectionsQueryHandler : IRequestHandler<GetAllSectionsQuery, List<GetSectionViewModel>>
     {
         private readonly ISectionRepository _sectionRepository;
+        private readonly IRoomRepository _roomRepository;
 
-        public GetAllSectionsQueryHandler(ISectionRepository sectionRepository)
+        public GetAllSectionsQueryHandler(ISectionRepository sectionRepository, IRoomRepository roomRepository)
         {
             _sectionRepository = sectionRepository;
+            _roomRepository = roomRepository;
         }
 
-        public async Task<List<SectionViewModel>> Handle(GetAllSectionsQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetSectionViewModel>> Handle(GetAllSectionsQuery request, CancellationToken cancellationToken)
         {
-            var sections = await _sectionRepository.GetSectionViewModelAsync(request.disponible);   
+            var sections = await _sectionRepository.GetSectionsViewModelAsync(request.disponible);
 
+            List<GetSectionViewModel> sectionsViewModel = new List<GetSectionViewModel>();
 
-            var sectionsViewModel = sections.Select(s => new SectionViewModel
+            foreach (var section in sections)
             {
-                CreatedOn = s.CreatedOn,
-                Description = s.Description,
-                EndSection = s.EndSection,
-                Name = s.Name,
-                NameRoom = s.Room.Name,
-                StartSection = s.StartSection,
-                Status = s.Status.ToString(),
-                MaximumTickets= s.MaximumTickets, 
-                Tickets = s.Tickets.Select(s => new TicketViewModel
+                var sectionSeat = await _roomRepository.GetSeatsStatusBySection(section.Id);
+
+                var seatsViewModel = sectionSeat.Select(s => new SeatViewModel
                 {
-                    Number = s.Id,
-                    SeatPosition = s.Seat.Position,
-                    Status = s.Status.ToString()
-                }).ToList(),
-            }).ToList();
+                    Position = s.Position,
+                    Status = s.IsDisponible ? "Disponible" : "Ocuped"
+                }).ToList();
+
+                GetSectionViewModel sectionViewModel = new GetSectionViewModel
+                {
+                    CreatedOn = section.CreatedOn,
+                    Description = section.Description,
+                    EndSection = section.EndSection,
+                    Name = section.Name,
+                    NameRoom = section.Room.Name,
+                    StartSection = section.StartSection,
+                    Status = section.Status.ToString(),
+                    TicketDisponibles = section.TickestDisponible,
+                    Seats = seatsViewModel
+                };
+                sectionsViewModel.Add(sectionViewModel);
+
+            }
 
             return sectionsViewModel;
         }

@@ -4,11 +4,13 @@
     {
         public string Name { get; private set; }
         public bool IsRoomOcuped { get; private set; }
+        public int MaximumTicket { get; set; }
         public List<Section> Sections { get; private set; }
         public List<Seat> Seats { get; private set; } 
-        public Room(string name)
+        public Room(string name,int maximumTicket)
         {
             Name = name;
+            MaximumTicket = maximumTicket;
             IsRoomOcuped = false;
             Sections= new List<Section>();
             Seats= new List<Seat>();

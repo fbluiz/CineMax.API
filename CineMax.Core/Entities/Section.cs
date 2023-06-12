@@ -1,4 +1,5 @@
 ﻿using CineMax.Core.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CineMax.Core.Entities
 {
@@ -6,7 +7,7 @@ namespace CineMax.Core.Entities
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public int MaximumTickets { get; private set; }
+        public int TickestDisponible { get; private set; }
         public DateTime StartSection { get; private set; }
         public DateTime EndSection { get; private set; }
         public DateTime CreatedOn { get; private set; }
@@ -17,8 +18,7 @@ namespace CineMax.Core.Entities
         public Movie Movie { get; private set; }
         public Room Room { get; private set; }
 
-
-        public Section (string name, string description, DateTime startSection, DateTime endSection, int movieId, int roomId, int maximumTickets)
+        public Section (string name, string description, DateTime startSection, DateTime endSection, int movieId, int roomId, int ticketsDisponible)
         {
             Name = name;
             Description = description;
@@ -29,10 +29,14 @@ namespace CineMax.Core.Entities
             RoomId = roomId;
             Status = SectionStatusEnum.Created;
             Tickets = new List<Ticket>();
-            MaximumTickets = maximumTickets;
+            TickestDisponible = ticketsDisponible;
         }
 
-        public void Update(string? name, string? description, DateTime? startSection, DateTime? endSection, SectionStatusEnum? status, int? roomId, int? maximumTickets)
+        public Section()
+        {
+        }
+
+        public void Update(string? name, string? description, DateTime? startSection, DateTime? endSection, SectionStatusEnum? status, int? roomId, int? tickestDisponible)
         {
             Name = name ?? Name;
             Description = description ?? Description;
@@ -40,7 +44,7 @@ namespace CineMax.Core.Entities
             EndSection = endSection ?? EndSection;
             Status = status ?? Status;
             RoomId = roomId ?? RoomId;
-            MaximumTickets = maximumTickets ?? MaximumTickets;
+            TickestDisponible = tickestDisponible ?? TickestDisponible;
         }
 
         public void Progress()

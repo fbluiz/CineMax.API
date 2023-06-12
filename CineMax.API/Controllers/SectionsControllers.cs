@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CineMax.API.Controllers
 {
     [Route("api/sections")]
+    [Authorize]
     public class SectionsControllers : ControllerBase
     {
         private readonly IMediator _mediator;

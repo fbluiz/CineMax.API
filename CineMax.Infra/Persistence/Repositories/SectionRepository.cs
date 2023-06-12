@@ -15,11 +15,10 @@ namespace CineMax.Infra.Persistence.Repositories
             await _dbContext.Tickets.AddAsync(new Ticket(idSection));
             await SaveChangesAsync();
         }
-        public async Task<List<Section>> GetSectionViewModelAsync(bool? disponible)
+        public async Task<List<Section>> GetSectionsViewModelAsync(bool? disponible)
         {
             return await _dbContext.Sections
                 .Where(s => disponible != true && (s.Removed == false || s.Removed == null) || s.Status == SectionStatusEnum.Created && (s.Removed == false || s.Removed == null))
-                .Include(s => s.Tickets)
                 .Include(s => s.Room)
                 .ToListAsync();
 
@@ -31,6 +30,15 @@ namespace CineMax.Infra.Persistence.Repositories
             //{
             //    return await _dbContext.Sections.Include(s => s.Tickets).Include(s => s.Room).ToListAsync();
         }
+
+        public async Task<Section> GetSectionViewModelByIdAsync(int sectionId)
+        {
+            return await _dbContext.Sections
+                .Include(s => s.Room)
+                .FirstOrDefaultAsync(s => s.Id == sectionId);
+        }
+
+
         public async Task UpdateSectionAsync(Section section)
         {
             _dbContext.Update(section);

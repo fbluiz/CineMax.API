@@ -1,4 +1,5 @@
-﻿using CineMax.Core.Entities;
+﻿using CineMax.Application.ViewModels;
+using CineMax.Core.Entities;
 
 namespace CineMax.Core.Repositories
 {
@@ -8,5 +9,6 @@ namespace CineMax.Core.Repositories
         Task<Room> GetByIdRoomAndSectionsAsync(int id);
         Task AddSeatAsync(Seat seat);
         Task<Room> GetRoomAndSeatsByIdAsync(int id);
+        Task<List<GetSeatsStatusBySectionViewModel>> GetSeatsStatusBySection(int sectionId);
     }
 }

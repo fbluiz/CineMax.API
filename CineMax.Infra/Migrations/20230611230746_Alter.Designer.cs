@@ -4,6 +4,7 @@ using CineMax.Infra.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CineMax.Infra.Migrations
 {
     [DbContext(typeof(ICineMaxDbContext))]
-    partial class ICineMaxDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611230746_Alter")]
+    partial class Alter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,28 +216,6 @@ namespace CineMax.Infra.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Sections");
-                });
-
-            modelBuilder.Entity("CineMax.Core.Entities.SectionSeat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDisponible")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SeatId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SectionSeat");
                 });
 
             modelBuilder.Entity("CineMax.Core.Entities.Ticket", b =>
