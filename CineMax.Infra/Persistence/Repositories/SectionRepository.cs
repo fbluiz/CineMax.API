@@ -20,21 +20,15 @@ namespace CineMax.Infra.Persistence.Repositories
             return await _dbContext.Sections
                 .Where(s => disponible != true && (s.Removed == false || s.Removed == null) || s.Status == SectionStatusEnum.Created && (s.Removed == false || s.Removed == null))
                 .Include(s => s.Room)
+                .Include(s => s.Movie)
                 .ToListAsync();
-
-            //if (disponible == true)
-            //{
-            //    return await _dbContext.Sections.Where(s => s.Status == SectionStatusEnum.Created).Include(s => s.Tickets).Include(s => s.Room).ToListAsync();
-            //}
-            //else
-            //{
-            //    return await _dbContext.Sections.Include(s => s.Tickets).Include(s => s.Room).ToListAsync();
         }
 
         public async Task<Section> GetSectionViewModelByIdAsync(int sectionId)
         {
             return await _dbContext.Sections
                 .Include(s => s.Room)
+                .Include(s => s.Movie)
                 .FirstOrDefaultAsync(s => s.Id == sectionId);
         }
 

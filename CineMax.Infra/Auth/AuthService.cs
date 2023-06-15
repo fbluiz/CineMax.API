@@ -96,7 +96,7 @@ namespace CineMax.Infra.Auth
             var claims = await _userManager.GetClaimsAsync(User);
             var roles = await _userManager.GetRolesAsync(User);
 
-            claims.Add(new Claim (JwtRegisteredClaimNames.Sub, User.Id));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, User.Id));
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, User.Email));
             claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
             claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString()));

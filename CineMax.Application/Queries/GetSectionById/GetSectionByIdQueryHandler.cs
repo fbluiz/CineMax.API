@@ -26,7 +26,8 @@ namespace CineMax.Application.Queries.GetSectionById
             var seatsViewModel = sectionSeat.Select(s => new SeatViewModel
             {
                 Position = s.Position,
-                Status = s.IsDisponible ? "Disponible" : "Ocuped"
+                Status = s.IsDisponible ? "Disponible" : "Ocuped",
+                Id= s.Id,
             }).ToList();
 
             GetSectionViewModel sectionViewModel = new GetSectionViewModel
@@ -39,7 +40,8 @@ namespace CineMax.Application.Queries.GetSectionById
                 StartSection = section.StartSection,
                 Status = section.Status.ToString(),
                 TicketDisponibles = section.TickestDisponible,
-                Seats = seatsViewModel
+                Seats = seatsViewModel,
+                NameMovie = section.Movie.Title
             };
 
             return sectionViewModel;

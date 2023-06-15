@@ -11,16 +11,19 @@ namespace CineMax.API.Controllers
     public class TicketsControllers : ControllerBase
     {
         private readonly IMediator _mediator;
-
+        
         public TicketsControllers(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet]
-        [ServiceFilter(typeof(ExtractUserIdFilter))]
+        //[ServiceFilter(typeof(ExtractUserIdFilter))]
         public async Task<IActionResult> MyTickets(GetMyTicketsQuery query)
         {
+            HttpRequest request = HttpContext.Request;
+            var userId = ExtractUserIdFilter.ExtractUserIdFromToken(request);
+            query.UserId = Guid.Parse(userId);
             var tickets = await _mediator.Send(query);
 
             return Ok(tickets);

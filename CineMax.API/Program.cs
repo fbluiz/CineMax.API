@@ -27,10 +27,7 @@ builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<ExtractUserIdFilter>();
 
-
-
-
-var connectionString = builder.Configuration.GetConnectionString("CineMaxCsFb");
+var connectionString = builder.Configuration.GetConnectionString("CineMaxCsVini");
 // ATENÇÃO! Alterar a referência da string de conexão
 builder.Services.AddDbContext<ICineMaxDbContext>(options => options
 .UseSqlServer(connectionString));

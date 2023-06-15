@@ -11,7 +11,7 @@ namespace CineMax.Application.ViewModels
         public DateTime CreatedOn { get; set; }
         public string Status { get; set; }
         public string NameRoom { get; set; }
-        public string SeatsDisponible { get; set; }
+        public List<int> SeatsDisponible { get; set; }
         public int TicketDisponibles { get; set; }
     }
 }

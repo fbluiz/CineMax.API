@@ -10,5 +10,6 @@ namespace CineMax.Application.ViewModels
     {
         public string Position { get; set; }
         public string Status { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -1,36 +1,23 @@
 ﻿using CineMax.Application.Commands.CreateUser;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace CineMax.API.Attributes
 {
-    public class ExtractUserIdFilter : IActionFilter
+    public class ExtractUserIdFilter
     {
-        public void OnActionExecuting(ActionExecutingContext context)
+        public static string ExtractUserIdFromToken(HttpRequest request)
         {
-            if (context.HttpContext.User.Identity.IsAuthenticated)
-            {
-                var userId = context.HttpContext.User.FindFirst("sub")?.Value;
+            string token = request.Headers["Authorization"].ToString().Replace("Bearer ", "");
 
-                if (!string.IsNullOrEmpty(userId))
-                {
-                    if (Guid.TryParse(userId, out Guid userIdGuid))
-                    {
-                        foreach (var argument in context.ActionArguments.Values)
-                        {
-                            var userIdProperty = argument.GetType().GetProperty("UserId");
-                            if (userIdProperty != null && userIdProperty.CanWrite && userIdProperty.PropertyType == typeof(Guid))
-                            {
-                                userIdProperty.SetValue(argument, userIdGuid);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
 
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
+            string userId = jwtToken.Claims.First(claim => claim.Type == "sub").Value;
+
+            return userId;
         }
     }
 }

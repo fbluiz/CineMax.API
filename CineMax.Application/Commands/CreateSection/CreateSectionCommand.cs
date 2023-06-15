@@ -5,7 +5,7 @@ using MediatR;
 
 namespace CineMax.Application.Commands.CreateSection
 {
-    public class CreateSectionCommand : IRequest<SectionViewModel>
+    public class CreateSectionCommand : IRequest<bool>
     {
         public string Name { get; set; }
         public string Description { get; set; }

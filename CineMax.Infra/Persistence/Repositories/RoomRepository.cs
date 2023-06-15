@@ -15,7 +15,7 @@ namespace CineMax.Infra.Persistence.Repositories
 
         public RoomRepository(ICineMaxDbContext dbContext, IConfiguration configuration) : base(dbContext)
         {
-            _connectionString = configuration.GetConnectionString("CineMaxCsFb");
+            _connectionString = configuration.GetConnectionString("CineMaxCsVini");
         }
 
         public async Task AddSeatAsync(Seat seat)
@@ -50,7 +50,7 @@ namespace CineMax.Infra.Persistence.Repositories
             {
                 sqlConnection.Open();
 
-                var script = @"select s.Position, ss.IsDisponible
+                var script = @"select s.Position, ss.IsDisponible, s.Id
                             from SectionSeat ss
                             join Seats s on s.Id = ss.SeatId
                             where ss.SectionId = @sectionId";
