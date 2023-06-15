@@ -1,3 +1,4 @@
+using CineMax.API.Attributes;
 using CineMax.API.Extensions;
 using CineMax.Application.Commands.CreateUser;
 using CineMax.Core.Entities;
@@ -24,6 +25,8 @@ builder.Services.AddSwagger();
 
 builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<ExtractUserIdFilter>();
+
 
 
 

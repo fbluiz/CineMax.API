@@ -58,6 +58,8 @@ namespace CineMax.API.Controllers
         [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] UpdateMovieCommand command)
         {
+            if (id != command.Id)
+                return BadRequest("Route id is different from Json id");
             await _mediator.Send(command);
 
             if (command == null) 
@@ -68,7 +70,7 @@ namespace CineMax.API.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteSectionCommand command)
+        public async Task<IActionResult> Delete([FromRoute] int id, [FromBody] DeleteMovieCommand command)
         {
             if (command.Id != id)
                 return BadRequest("The route id is different from the given id.");

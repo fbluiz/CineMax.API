@@ -17,7 +17,7 @@ namespace CineMax.Application.Commands.UpdateMovie
           var movie = await _movieRepository.GetByIdAsync(m => m.Id == request.Id && (m.Removed == false || m.Removed == null));
           var duration = TimeSpan.Parse(request.Duration);
 
-            
+            //falta tratamento pra id null
           movie.Update(
                 request.Title,
                 request.Description,
