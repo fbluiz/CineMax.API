@@ -49,6 +49,7 @@ builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 builder.Services.AddScoped<ISectionSeatRepository, SectionSeatRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 var app = builder.Build();
 
