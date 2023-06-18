@@ -13,11 +13,13 @@ namespace CineMax.Core.Entities
         public Seat Seat { get; private set; }
         public Client Client { get; private set; }
 
-        public Ticket(int sectionId)
+        public Ticket(int sectionId, int clientId, int seatId)
         {
             SectionId = sectionId;
             CreatedOn= DateTime.Now;
-            Status = TicketStatusEnum.PaymentAwaiting;
+            Status = TicketStatusEnum.Validated;
+            ClientId = clientId;
+            SeatId = seatId;
         }
 
        public void Repay() 

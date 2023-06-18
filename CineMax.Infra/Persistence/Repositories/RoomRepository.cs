@@ -44,22 +44,40 @@ namespace CineMax.Infra.Persistence.Repositories
             return await _dbContext.Seats.FirstOrDefaultAsync(s => s.Id == seatId);
         }
 
-        public async Task<List<GetSeatsStatusBySectionViewModel>> GetSeatsStatusBySection(int sectionId)
+        public async Task<List<GetSeatsStatusBySectionViewModel>> GetSeatsStatusBySection(int sectionId, int? seatId = null)
         {
+            string whereClause = "";
+
+            if (seatId != null)
+            {
+                whereClause = "and s.id = @seatId";
+            }
             using (var sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
 
-                var script = @"select s.Position, ss.IsDisponible, s.Id
+                var script = @$"select s.Position, ss.IsDisponible, s.Id
                             from SectionSeat ss
                             join Seats s on s.Id = ss.SeatId
-                            where ss.SectionId = @sectionId";
+                            where ss.SectionId = @sectionId
+                            {whereClause}";
+                            
 
-                return (await sqlConnection.QueryAsync<GetSeatsStatusBySectionViewModel>(script, new { sectionId = sectionId })).ToList();
+                return (await sqlConnection.QueryAsync<GetSeatsStatusBySectionViewModel>(script, new { sectionId, seatId })).ToList();
             }
         
         }
+
+        public async Task<SectionSeat> GetSectionSeatAsync(int sectionId, int seatId)
+        {
+            return await _dbContext.SectionSeat.FirstOrDefaultAsync(ss => ss.SeatId== seatId && ss.SectionId == sectionId);
+        }
+
+        public async Task UpdateSectionSeatAsync(SectionSeat sectionSeat)
+        {           
+           _dbContext.Entry(sectionSeat).State = EntityState.Modified;
+           _dbContext.Set<SectionSeat>().Update(sectionSeat);
+           await SaveChangesAsync();   
+        }
     }
 }
-
-

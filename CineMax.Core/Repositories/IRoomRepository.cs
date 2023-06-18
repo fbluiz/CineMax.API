@@ -8,7 +8,9 @@ namespace CineMax.Core.Repositories
         Task<List<Room>> GetAllRoomAndSectionsAsync();
         Task<Room> GetByIdRoomAndSectionsAsync(int id);
         Task AddSeatAsync(Seat seat);
+        Task UpdateSectionSeatAsync(SectionSeat sectionSeat);
         Task<Room> GetRoomAndSeatsByIdAsync(int id);
-        Task<List<GetSeatsStatusBySectionViewModel>> GetSeatsStatusBySection(int sectionId);
+        Task<List<GetSeatsStatusBySectionViewModel>> GetSeatsStatusBySection(int sectionId,int? seatId = null);
+        Task<SectionSeat> GetSectionSeatAsync(int sectionId, int seatId);
     }
 }

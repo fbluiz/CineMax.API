@@ -10,11 +10,6 @@ namespace CineMax.Infra.Persistence.Repositories
         public SectionRepository(ICineMaxDbContext dbContext) : base(dbContext)
         {
         }
-        public async Task AddNewTicketAsync(int idSection)
-        {
-            await _dbContext.Tickets.AddAsync(new Ticket(idSection));
-            await SaveChangesAsync();
-        }
         public async Task<List<Section>> GetSectionsViewModelAsync(bool? disponible)
         {
             return await _dbContext.Sections

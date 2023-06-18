@@ -39,8 +39,6 @@ namespace CineMax.API.Controllers
         [HttpPost("/login")]
         public async Task<ActionResult<UserLoginResponse>> Login(UserLoginRequest userLogin)
         {
-            //if (!ModelState.IsValid)
-            //    return BadRequest();
 
             var result = await _authService.Login(userLogin);
             if (result.Sucess)

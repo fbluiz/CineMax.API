@@ -1,13 +1,14 @@
-using CineMax.API.Attributes;
 using CineMax.API.Extensions;
 using CineMax.Application.Commands.CreateUser;
 using CineMax.Core.Entities;
 using CineMax.Core.Repositories;
 using CineMax.Core.Services.Auth;
+using CineMax.Core.Services.Payment;
 using CineMax.Infra.Auth;
 using CineMax.Infra.Auth.Data;
 using CineMax.Infra.Persistence;
 using CineMax.Infra.Persistence.Repositories;
+using CineMax.Infra.Services;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,6 @@ builder.Services.AddSwagger();
 
 builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
-builder.Services.AddScoped<ExtractUserIdFilter>();
 
 var connectionString = builder.Configuration.GetConnectionString("CineMaxCsVini");
 // ATENÇÃO! Alterar a referência da string de conexão
@@ -50,6 +50,7 @@ builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 builder.Services.AddScoped<ISectionSeatRepository, SectionSeatRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 var app = builder.Build();
 

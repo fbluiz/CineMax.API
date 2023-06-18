@@ -17,7 +17,7 @@ namespace CineMax.Core.Entities
             IsDisponible = isDisponible;
         }
 
-        void ChangeAvailability (bool isDisponible)
+        public void ChangeAvailability (bool isDisponible)
         {
             IsDisponible = isDisponible;
         }

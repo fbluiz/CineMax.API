@@ -7,7 +7,7 @@ namespace CineMax.Core.Entities
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public int TickestDisponible { get; private set; }
+        public int TicketsDisponible { get; private set; }
         public DateTime StartSection { get; private set; }
         public DateTime EndSection { get; private set; }
         public DateTime CreatedOn { get; private set; }
@@ -29,7 +29,7 @@ namespace CineMax.Core.Entities
             RoomId = roomId;
             Status = SectionStatusEnum.Created;
             Tickets = new List<Ticket>();
-            TickestDisponible = ticketsDisponible;
+            TicketsDisponible = ticketsDisponible;
         }
 
         public Section()
@@ -44,7 +44,7 @@ namespace CineMax.Core.Entities
             EndSection = endSection ?? EndSection;
             Status = status ?? Status;
             RoomId = roomId ?? RoomId;
-            TickestDisponible = tickestDisponible ?? TickestDisponible;
+            TicketsDisponible = tickestDisponible ?? TicketsDisponible;
         }
 
         public void Progress()
@@ -65,6 +65,11 @@ namespace CineMax.Core.Entities
                 EndSection = DateTime.Now;
             }
                 
+        }
+
+        public void SubtractTicketsDisponible()
+        {
+            TicketsDisponible = TicketsDisponible - 1;
         }
 
     }

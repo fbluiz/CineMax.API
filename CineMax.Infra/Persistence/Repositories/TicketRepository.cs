@@ -23,16 +23,14 @@ namespace CineMax.Infra.Persistence.Repositories
             {
                 sqlConnection.Open();
 
-                string script = @"select m.Title nameMovie,t.Id,st.Position,t.Status,s.Name,s.Id,r.Name
+                string script = @"select t.Id TicketId, s.Id SectionId, s.Name NameSection, m.Title NameMovie, st.Position SeatPosition, t.Status, r.name nameRoom
                                   from Tickets t
-                                  join Clients c on c.Id = t.ClientId 
-                                  join Sections s on s.Id = t.SectionId
-                                  join Rooms r on r.Id = s.RoomId 
+                                  join Sections s on t.SectionId = s.Id
+                                  join rooms r on r.id = s.RoomId
                                   join Movies m on m.Id = s.MovieId
-                                  join SectionSeat ss on ss.SectionId = s.Id
-                                  join Seats st on st.Id = ss.SeatId
-                                  where t.ClientId = @ClientId";
-
+                                  join Seats st on st.Id = t.SeatId
+                                  join SectionSeat ss on ss.SeatId = st.id and ss.SectionId = s.id
+                                   where t.ClientId = @ClientId";
                 return (await sqlConnection.QueryAsync<TicketViewModel>(script, new { clientId })).ToList();
                  
             }

@@ -1,11 +1,10 @@
-﻿using CineMax.API.Attributes;
-using CineMax.Application.Queries;
+﻿using CineMax.Application.Commands.BuyTicket;
 using CineMax.Application.Queries.GetMyTickets;
 using CineMax.Infra.Auth.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CineMax.API.Controllers
 {
@@ -36,10 +35,22 @@ namespace CineMax.API.Controllers
 
             return Ok(tickets);
         }
-        //[HttpPost("buy/{sectionId}")]
-        //public async Task<IActionResult> BuyTickey(int id)
-        //{
-        //}
+        [HttpPost("buy/{sectionId}")]
+        [Authorize(Roles = Roles.ClientBasic)]
+        public async Task<IActionResult> BuyTicket([FromRoute] int sectionId,[FromBody] BuyTicketCommand command)
+        {
+            Guid userId = ExtractUserIdFromToken();
+            command.UserId = userId;
+
+            command.SectionId = sectionId;
+
+            var response = await _mediator.Send(command);
+
+            if(response.Errors.Any())
+                return BadRequest(response);
+
+            return Ok(response);    
+        }
 
         //[HttpPost("/repay/{ticketId})")]
         //public async Task<IActionResult> RepayTicket(int id)

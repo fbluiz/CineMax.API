@@ -41,7 +41,7 @@ namespace CineMax.Application.Queries.GetAllSections
                     NameRoom = section.Room.Name,
                     StartSection = section.StartSection,
                     Status = section.Status.ToString(),
-                    TicketDisponibles = section.TickestDisponible,
+                    TicketDisponibles = section.TicketsDisponible,
                     NameMovie = section.Movie.Title,
                     Seats = seatsViewModel  
                 };
