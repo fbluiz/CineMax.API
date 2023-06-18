@@ -1,6 +1,8 @@
-﻿using CineMax.Application.Commands.CreateUser;
+﻿using CineMax.API.Controllers;
+using CineMax.Application.Commands.CreateUser;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 
