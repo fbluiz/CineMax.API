@@ -6,5 +6,6 @@ namespace CineMax.Core.Services.Payment
     public interface IPaymentService
     {
         PaymentResponse Process(PaymentRequest request);
+
     }
 }

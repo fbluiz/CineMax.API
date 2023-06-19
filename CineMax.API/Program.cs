@@ -50,6 +50,7 @@ builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 builder.Services.AddScoped<ISectionSeatRepository, SectionSeatRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<IPaymentRefundLogRepository, PaymentRefundLogRepository>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 var app = builder.Build();

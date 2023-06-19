@@ -1,10 +1,14 @@
 ﻿using CineMax.Application.Commands.BuyTicket;
+using CineMax.Application.Commands.RepayTicket;
+using CineMax.Application.Queries.GetMovieById;
 using CineMax.Application.Queries.GetMyTickets;
+using CineMax.Core.Entities;
 using CineMax.Infra.Auth.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CineMax.API.Controllers
 {
@@ -52,9 +56,20 @@ namespace CineMax.API.Controllers
             return Ok(response);    
         }
 
-        //[HttpPost("/repay/{ticketId})")]
-        //public async Task<IActionResult> RepayTicket(int id)
-        //{
-        //}
+        [HttpPost("/repay/{ticketId})")]
+        public async Task<IActionResult> RequestRefundTicket([FromRoute] int ticketId, [FromBody] RepayTicketCommand command)
+        {
+            Guid userId = ExtractUserIdFromToken();
+            command.TicketId = ticketId;
+
+            var tickets = await _mediator.Send(command);
+
+            if (tickets == null)
+            {
+                return NotFound("Tickets not found in database for that customer.");
+            }
+
+            return Ok(tickets);
+        }
     }
 }

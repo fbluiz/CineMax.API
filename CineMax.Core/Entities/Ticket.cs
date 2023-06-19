@@ -38,7 +38,11 @@ namespace CineMax.Core.Entities
             if (Status == TicketStatusEnum.PaymentAwaiting)
                 Status = TicketStatusEnum.Canceled;
         }
-
+        public void AwaitingRefundRequest()
+        {
+            if (Status == TicketStatusEnum.Validated)
+                Status = TicketStatusEnum.RefundRequest;
+        }
 
     }
 }
