@@ -2,9 +2,12 @@
 {
     public class RepayTicketLogViewModel
     {
-        public int TicketId { get; set; }
-        public int ClientId { get; set; }
-        public Guid AdminId { get; set; }
-        public string LogMessage { get; set; }
+        public List<string> Errors { get; set; } = new List<string>();
+        public bool Success { get; set; } = false;
+        public bool TicketBelongstoCustomer { get; set; } = true;
+        public void AddError(string error)
+        {
+            Errors.Add(error);
+        }
     }
 }

@@ -17,5 +17,18 @@ namespace CineMax.Infra.Services
 
             return response;
         }
+
+        public PaymentResponse RequestRefund(RefundRequest request)
+        {
+            PaymentResponse response = new PaymentResponse { };
+
+            if (request is null)
+            {
+                response.Success = false;
+            }
+            response.Success = true;
+
+            return response;
+        }
     }
 }

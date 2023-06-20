@@ -56,20 +56,22 @@ namespace CineMax.API.Controllers
             return Ok(response);    
         }
 
-        [HttpPost("/repay/{ticketId})")]
+        [HttpPut("/repay/{ticketId})")]
         public async Task<IActionResult> RequestRefundTicket([FromRoute] int ticketId, [FromBody] RepayTicketCommand command)
         {
             Guid userId = ExtractUserIdFromToken();
+            command.UserId = userId;
             command.TicketId = ticketId;
+            
+            var response = await _mediator.Send(command);
 
-            var tickets = await _mediator.Send(command);
+            if (response.TicketBelongstoCustomer == false)
+                return Forbid("The ticket does not belong to the logged in user.");
 
-            if (tickets == null)
-            {
-                return NotFound("Tickets not found in database for that customer.");
-            }
+            if (response.Errors.Any())
+                return BadRequest(response);
 
-            return Ok(tickets);
+            return Ok(response);
         }
     }
 }

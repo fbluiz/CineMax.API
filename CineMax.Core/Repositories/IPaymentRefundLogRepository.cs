@@ -1,4 +1,4 @@
-﻿using CineMax.Core.Entities;
+﻿using CineMax.Core.Logs;
 
 namespace CineMax.Core.Repositories
 {

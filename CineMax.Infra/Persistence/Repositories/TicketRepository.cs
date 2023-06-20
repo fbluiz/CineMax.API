@@ -35,7 +35,5 @@ namespace CineMax.Infra.Persistence.Repositories
                  
             }
         }
-
-
     }
 }
