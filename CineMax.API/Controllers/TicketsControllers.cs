@@ -2,6 +2,7 @@
 using CineMax.Application.Commands.RepayTicket;
 using CineMax.Application.Queries.GetMovieById;
 using CineMax.Application.Queries.GetMyTickets;
+using CineMax.Application.Queries.GetTicketsPendingRepay;
 using CineMax.Core.Entities;
 using CineMax.Infra.Auth.Constants;
 using MediatR;
@@ -39,6 +40,7 @@ namespace CineMax.API.Controllers
 
             return Ok(tickets);
         }
+
         [HttpPost("buy/{sectionId}")]
         [Authorize(Roles = Roles.ClientBasic)]
         public async Task<IActionResult> BuyTicket([FromRoute] int sectionId,[FromBody] BuyTicketCommand command)
@@ -57,6 +59,7 @@ namespace CineMax.API.Controllers
         }
 
         [HttpPut("/repay/{ticketId})")]
+        [Authorize(Roles = Roles.ClientBasic)]
         public async Task<IActionResult> RequestRefundTicket([FromRoute] int ticketId, [FromBody] RepayTicketCommand command)
         {
             Guid userId = ExtractUserIdFromToken();
@@ -73,5 +76,26 @@ namespace CineMax.API.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("/ticketspendingrepay")]
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<IActionResult> GetTicketsPendingRepay()
+        {
+            var query = new GetTicketsPendingRepayQuery();
+
+            var TicketsPendingRepay = await _mediator.Send(query);
+
+            if (TicketsPendingRepay is null)
+                return BadRequest("Error fetching pending refund tickets.");
+
+            return Ok(TicketsPendingRepay);
+        }
+
+        //[HttpPut("/confirmrepay/{ticketId})")]
+        //[Authorize(Roles = Roles.Admin)]
+        //public async Task<IActionResult> ConfirmRefundTicket([FromBody] int ticketId)
+        //{
+
+        //}
     }
 }
