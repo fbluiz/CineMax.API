@@ -72,5 +72,9 @@ namespace CineMax.Core.Entities
             TicketsDisponible = TicketsDisponible - 1;
         }
 
+        public void AddTicketDisponible()
+        {
+            TicketsDisponible = TicketsDisponible + 1;
+        }
     }
 }

@@ -23,9 +23,19 @@ namespace CineMax.Infra.Services
             PaymentResponse response = new PaymentResponse { };
 
             if (request is null)
-            {
-                response.Success = false;
-            }
+               response.Success = false;
+
+            response.Success = true;
+
+            return response;
+        }
+        public PaymentResponse ApproveRefund(RefundRequest request)
+        {
+            PaymentResponse response = new PaymentResponse { };
+            
+            if (request is null)
+             response.Success = false;
+
             response.Success = true;
 
             return response;

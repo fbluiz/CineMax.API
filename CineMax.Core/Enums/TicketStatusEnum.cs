@@ -7,5 +7,6 @@
         PaymentRefunded = 2,
         Canceled = 3,
         RefundRequest = 4,
+        RefundDeclined = 5
     }
 }

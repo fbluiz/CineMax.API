@@ -24,9 +24,16 @@ namespace CineMax.Core.Entities
 
        public void Repay() 
         {
-            if (Status == TicketStatusEnum.Validated)
+            if (Status == TicketStatusEnum.RefundRequest)
                 Status = TicketStatusEnum.PaymentRefunded;
         }
+
+        public void RefuseRefund()
+        {
+            if (Status == TicketStatusEnum.RefundRequest)
+                Status = TicketStatusEnum.RefundDeclined;
+        }
+
 
        public void Validate()
         {

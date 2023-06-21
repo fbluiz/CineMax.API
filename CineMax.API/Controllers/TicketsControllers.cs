@@ -1,13 +1,13 @@
 ﻿using CineMax.Application.Commands.BuyTicket;
+using CineMax.Application.Commands.ConfirmRefoundTicket;
 using CineMax.Application.Commands.RepayTicket;
-using CineMax.Application.Queries.GetMovieById;
 using CineMax.Application.Queries.GetMyTickets;
 using CineMax.Application.Queries.GetTicketsPendingRepay;
-using CineMax.Core.Entities;
 using CineMax.Infra.Auth.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace CineMax.API.Controllers
@@ -78,7 +78,6 @@ namespace CineMax.API.Controllers
         [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> GetTicketsPendingRepay(GetTicketsPendingRepayQuery query)
         {
-
             var TicketsPendingRepay = await _mediator.Send(query);
 
             if (TicketsPendingRepay is null)
@@ -87,11 +86,18 @@ namespace CineMax.API.Controllers
             return Ok(TicketsPendingRepay);
         }
 
-        //[HttpPut("/confirmrepay/{ticketId})")]
-        //[Authorize(Roles = Roles.Admin)]
-        //public async Task<IActionResult> ConfirmRefundTicket([FromBody] int ticketId)
-        //{
+        [HttpPut("/confirmrepay/{ticketId})")]
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<IActionResult> ConfirmRefundTicket([FromRoute] int ticketId, ConfirmRefoundTicketCommand command)
+        {
+            command.TicketId = ticketId;
 
-        //}
+            var logResult = await _mediator.Send(command);
+
+            if (logResult is null)
+                return NotFound("Refund request not found.");
+
+            return Ok(logResult);
+        }
     }
 }

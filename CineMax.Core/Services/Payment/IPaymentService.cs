@@ -7,5 +7,6 @@ namespace CineMax.Core.Services.Payment
     {
         PaymentResponse Process(PaymentRequest request);
         PaymentResponse RequestRefund(RefundRequest request);
+        PaymentResponse ApproveRefund(RefundRequest request);
     }
 }
