@@ -22,7 +22,7 @@ namespace CineMax.Application.Queries.GetMyTicketsPendingRepay
         {
             var client = await _clientRepository.GetByIdAsync(c => c.UserId == request.UserId);
 
-            var tickets = (await _ticketRepository.GetAsync()).Where(t => t.Status == TicketStatusEnum.RefundRequest && t.Removed == false && t.ClientId == client.Id).ToList();
+            var tickets = (await _ticketRepository.GetAsync()).Where(t => t.Status == TicketStatusEnum.RefundRequest && (t.Removed ?? false) == false && t.ClientId == client.Id).ToList();
 
             if (tickets == null)
                 return null;

@@ -18,7 +18,7 @@ namespace CineMax.Application.Queries.GetTicketsPendingRepay
 
         public async Task<List<TicketsPendingRepayViewModel>> Handle(GetTicketsPendingRepayQuery request, CancellationToken cancellationToken)
         {
-            var tickets = (await _ticketRepository.GetAsync()).Where(t => t.Status == TicketStatusEnum.RefundRequest && t.Removed == false).ToList();
+            var tickets = (await _ticketRepository.GetAsync()).Where(t => t.Status == TicketStatusEnum.RefundRequest && (t.Removed ?? false) == false).ToList();
 
             if (tickets == null)
                 return null;
