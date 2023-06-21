@@ -9,9 +9,11 @@ namespace CineMax.Application.Queries.GetTicketsPendingRepay
     {
         private readonly ITicketRepository _ticketRepository;
         private readonly IPaymentRefundLogRepository _paymentRefundLogRepository;
-        public GetTicketsPendingRepayQueryHandler(ITicketRepository ticketRepository)
+
+        public GetTicketsPendingRepayQueryHandler(ITicketRepository ticketRepository, IPaymentRefundLogRepository paymentRefundLogRepository)
         {
             _ticketRepository = ticketRepository;
+            _paymentRefundLogRepository = paymentRefundLogRepository;
         }
 
         public async Task<List<TicketsPendingRepayViewModel>> Handle(GetTicketsPendingRepayQuery request, CancellationToken cancellationToken)
