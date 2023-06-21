@@ -50,6 +50,5 @@ namespace CineMax.Core.Entities
             if (Status == TicketStatusEnum.Validated)
                 Status = TicketStatusEnum.RefundRequest;
         }
-
     }
 }

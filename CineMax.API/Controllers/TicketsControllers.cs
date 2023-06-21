@@ -91,7 +91,6 @@ namespace CineMax.API.Controllers
         public async Task<IActionResult> ConfirmRefundTicket([FromRoute] int ticketId, ConfirmRefoundTicketCommand command)
         {
             command.TicketId = ticketId;
-
             var logResult = await _mediator.Send(command);
 
             if (logResult is null)
