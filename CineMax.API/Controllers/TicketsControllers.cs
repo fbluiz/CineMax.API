@@ -33,9 +33,7 @@ namespace CineMax.API.Controllers
             var tickets = await _mediator.Send(query);
 
             if(tickets == null)
-            {
-                return NotFound("Tickets not found in database for that customer.");
-            }
+              return NotFound("Tickets not found in database for that customer.");
 
             return Ok(tickets);
         }
