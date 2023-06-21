@@ -4,6 +4,7 @@ using CineMax.Infra.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CineMax.Infra.Migrations
 {
     [DbContext(typeof(ICineMaxDbContext))]
-    partial class ICineMaxDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230620233751_Add-Table PaymentRefundLog")]
+    partial class AddTablePaymentRefundLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

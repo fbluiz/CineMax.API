@@ -4,9 +4,7 @@
     {
         public int ticketId { get; set; }
         public int clientId { get; set; }
-        public int sectionId { get; set; }
-        public int seatId { get; set; }
-        public string Status { get; set; }
-
+        public List<string> StatusHistory { get; set; }
+        public DateTime BuyDateTime { get; set; }
     }
 }

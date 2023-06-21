@@ -3,7 +3,6 @@ using CineMax.Core.DTOs.PaymentDTOs.Request;
 using CineMax.Core.Entities;
 using CineMax.Core.Enums;
 using CineMax.Core.Repositories;
-using CineMax.Core.Services.Auth;
 using CineMax.Core.Services.Payment;
 using MediatR;
 
@@ -43,7 +42,6 @@ namespace CineMax.Application.Commands.BuyTicket
                 response.Errors.Add("Tickets exhausted");
                 return response;
             }
-
             var seatSectionStatus = (await _roomRepository.GetSeatsStatusBySection(request.SectionId, request.SeatId)).First();
 
             if (!seatSectionStatus.IsDisponible)

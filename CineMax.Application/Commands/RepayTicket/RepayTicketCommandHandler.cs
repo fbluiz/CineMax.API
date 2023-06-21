@@ -52,13 +52,13 @@ namespace CineMax.Application.Commands.RepayTicket
 
            await _ticketRepository.UpdateAsync(ticket);
 
-           PaymentRefundLog PaymentRefundLog = new PaymentRefundLog(
+           PaymentRefundLog paymentRefundLog = new PaymentRefundLog(
                 ticket.Id,
                 ticket.ClientId,
                 "Awaiting refund request"
                 );
 
-           await _paymentRefundLogRepository.AddAsync(PaymentRefundLog);
+           await _paymentRefundLogRepository.AddAsync(paymentRefundLog);
 
            return response;
         }

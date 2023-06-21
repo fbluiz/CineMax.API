@@ -8,8 +8,7 @@ using CineMax.Infra.Auth.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 
 namespace CineMax.API.Controllers
 {
@@ -77,11 +76,10 @@ namespace CineMax.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("/ticketspendingrepay")]
+        [HttpGet("/pending-repay")]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> GetTicketsPendingRepay()
+        public async Task<IActionResult> GetTicketsPendingRepay(GetTicketsPendingRepayQuery query)
         {
-            var query = new GetTicketsPendingRepayQuery();
 
             var TicketsPendingRepay = await _mediator.Send(query);
 

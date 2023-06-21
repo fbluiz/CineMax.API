@@ -1,4 +1,5 @@
 ﻿using CineMax.Core.Entities;
+using CineMax.Core.Logs;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -17,6 +18,7 @@ namespace CineMax.Infra.Persistence
         public DbSet<Section> Sections { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<SectionSeat> SectionSeat { get; set; }
+        public DbSet<PaymentRefundLog> PaymentRefundLog { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
