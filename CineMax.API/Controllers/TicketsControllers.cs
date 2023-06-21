@@ -103,10 +103,6 @@ namespace CineMax.API.Controllers
             return Ok(TicketsPendingRepay);
         }
 
-        //[HttpPut("/confirmrepay/{ticketId})")]
-        //[Authorize(Roles = Roles.Admin)]
-        //public async Task<IActionResult> ConfirmRefundTicket([FromBody] int ticketId)
-        //{
         [HttpPut("/confirmrepay/{ticketId})")]
         [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> ConfirmRefundTicket([FromRoute] int ticketId, ConfirmRefoundTicketCommand command)
