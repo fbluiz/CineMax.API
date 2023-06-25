@@ -8,8 +8,6 @@ using CineMax.Infra.Auth.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace CineMax.API.Controllers

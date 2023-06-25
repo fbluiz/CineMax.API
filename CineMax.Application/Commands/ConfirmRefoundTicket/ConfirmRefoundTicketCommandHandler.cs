@@ -4,7 +4,6 @@ using CineMax.Core.Logs;
 using CineMax.Core.Repositories;
 using CineMax.Core.Services.Payment;
 using MediatR;
-using System.Runtime.InteropServices;
 
 namespace CineMax.Application.Commands.ConfirmRefoundTicket
 {
