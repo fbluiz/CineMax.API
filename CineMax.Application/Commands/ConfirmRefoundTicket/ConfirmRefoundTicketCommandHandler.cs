@@ -4,22 +4,24 @@ using CineMax.Core.Logs;
 using CineMax.Core.Repositories;
 using CineMax.Core.Services.Payment;
 using MediatR;
+using System.Runtime.InteropServices;
 
 namespace CineMax.Application.Commands.ConfirmRefoundTicket
 {
     public class ConfirmRefoundTicketCommandHandler : IRequestHandler<ConfirmRefoundTicketCommand, string>
     {
-        public ITicketRepository _ticketRepository { get; set; }
-        public IPaymentRefundLogRepository _paymentRefundLogRepository { get; set; }
-        public ISectionRepository _sectionRepository { get; set; }
-        public IPaymentService _paymentService { get; set; }
-
-        public ConfirmRefoundTicketCommandHandler(ITicketRepository ticketRepository, IPaymentRefundLogRepository paymentRefundLogRepository, ISectionRepository sectionRepository, IPaymentService paymentService)
+        private readonly ITicketRepository _ticketRepository;
+        private readonly IPaymentRefundLogRepository _paymentRefundLogRepository;
+        private readonly IRoomRepository _roomRepository;
+        private readonly ISectionRepository _sectionRepository;
+        private readonly IPaymentService _paymentService;
+        public ConfirmRefoundTicketCommandHandler(ITicketRepository ticketRepository, IPaymentRefundLogRepository paymentRefundLogRepository, ISectionRepository sectionRepository, IPaymentService paymentService, IRoomRepository roomRepository)
         {
             _ticketRepository = ticketRepository;
             _paymentRefundLogRepository = paymentRefundLogRepository;
             _sectionRepository = sectionRepository;
             _paymentService = paymentService;
+            _roomRepository = roomRepository;
         }
 
         public async Task<string> Handle(ConfirmRefoundTicketCommand request, CancellationToken cancellationToken)
@@ -28,7 +30,7 @@ namespace CineMax.Application.Commands.ConfirmRefoundTicket
             PaymentRefundLog log = new PaymentRefundLog(ticket.Id, ticket.ClientId, "");
 
 
-            if (ticket == null)
+            if (ticket == null || ticket.Status != TicketStatusEnum.RefundRequest)
                 return null;
 
             if (request.ToApprove)
@@ -42,10 +44,17 @@ namespace CineMax.Application.Commands.ConfirmRefoundTicket
 
                     var section = await _sectionRepository.GetByIdAsync(s => s.Id == ticket.SectionId);
 
+
                     if (section.Status == SectionStatusEnum.Created)
                     {
+                        // Caso a Seção ainda esteja open deve adcionar +1 na quantidade de tickets disponiveis
                         section.AddTicketDisponible();
                         await _sectionRepository.UpdateSectionAsync(section);
+
+                        // Alterar a Cadeira do ticket reembolsado para disponível
+                        var seatSectionStatus = await _roomRepository.GetSectionSeatAsync(section.Id, ticket.SeatId);
+                        seatSectionStatus.ChangeAvailability(true);
+                        await _roomRepository.UpdateSectionSeatAsync(seatSectionStatus);
                     }
 
                     log.LogMessage = "ticket refunded successfully";
