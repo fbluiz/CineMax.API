@@ -23,7 +23,7 @@ namespace CineMax.Infra.Persistence.Repositories
             {
                 sqlConnection.Open();
 
-                string script = @"select t.Id TicketId, s.Id SectionId, s.Name NameSection, m.Title NameMovie, st.Position SeatPosition, t.Status, r.name nameRoom
+                string script = @"select t.Id TicketId, s.Id SectionId,s.StartSection StartSectionBase , s.EndSection EndSectionBase, s.Name NameSection, m.Title NameMovie, st.Position SeatPosition, t.Status, r.name nameRoom
                                   from Tickets t
                                   join Sections s on t.SectionId = s.Id
                                   join rooms r on r.id = s.RoomId

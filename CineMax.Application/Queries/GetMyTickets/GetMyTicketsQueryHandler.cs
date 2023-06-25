@@ -1,4 +1,5 @@
 ﻿using CineMax.Application.ViewModels;
+using CineMax.Core.Entities;
 using CineMax.Core.Repositories;
 using MediatR;
 
@@ -24,9 +25,9 @@ namespace CineMax.Application.Queries.GetMyTickets
                 return null;
             }
 
-            var ticketViewModel = await _ticketRepository.GetTicketsByClientIdAsync(client.Id);
-
-            return ticketViewModel;
+            var ticketsViewModel = await _ticketRepository.GetTicketsByClientIdAsync(client.Id);
+                   
+            return ticketsViewModel;
         }
     }
 }
