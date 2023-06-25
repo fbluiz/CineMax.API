@@ -34,6 +34,7 @@ namespace CineMax.Application.Queries.GetAllSections
 
                 GetSectionViewModel sectionViewModel = new GetSectionViewModel
                 {
+                    SectionId = section.Id,
                     CreatedOn = section.CreatedOn,
                     Description = section.Description,
                     EndSection = section.EndSection,

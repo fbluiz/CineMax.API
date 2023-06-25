@@ -4,6 +4,7 @@ namespace CineMax.Application.ViewModels
 {
     public class GetSectionViewModel
     {
+        public int SectionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime StartSection { get; set; }
