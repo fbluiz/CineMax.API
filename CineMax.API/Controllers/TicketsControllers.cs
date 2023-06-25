@@ -57,8 +57,9 @@ namespace CineMax.API.Controllers
 
         [HttpPut("/repay/{ticketId}")]
         [Authorize(Roles = Roles.ClientBasic)]
-        public async Task<IActionResult> RequestRefundTicket([FromRoute] int ticketId, [FromBody] RepayTicketCommand command)
+        public async Task<IActionResult> RequestRefundTicket([FromRoute] int ticketId)
         {
+            var command = new RepayTicketCommand { };
             Guid userId = ExtractUserIdFromToken();
             command.UserId = userId;
             command.TicketId = ticketId;
@@ -76,8 +77,9 @@ namespace CineMax.API.Controllers
 
         [HttpGet("/pending-repay")]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> GetTicketsPendingRepay(GetTicketsPendingRepayQuery query)
+        public async Task<IActionResult> GetTicketsPendingRepay()
         {
+            var query = new GetTicketsPendingRepayQuery { };
             var TicketsPendingRepay = await _mediator.Send(query);
 
             if (TicketsPendingRepay is null)
