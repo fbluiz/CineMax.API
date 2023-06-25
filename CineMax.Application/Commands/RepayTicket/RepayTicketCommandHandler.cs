@@ -37,30 +37,40 @@ namespace CineMax.Application.Commands.RepayTicket
                 return response;
             }
 
-            var RefoundPaymentService = _paymentService.RequestRefund(new RefundRequest
+            if (ticket.Status == TicketStatusEnum.Validated)
             {
-                BuyIdentity = ticket.Id            
-            }) ;
+                var RefoundPaymentService = _paymentService.RequestRefund(new RefundRequest
+                {
+                    BuyIdentity = ticket.Id
+                });
 
-            if (!RefoundPaymentService.Success)
-            {
-                response.Errors.Add("There was an error requesting a refund.");
+                if (!RefoundPaymentService.Success)
+                {
+                    response.Errors.Add("There was an error requesting a refund.");
+                    return response;
+                }
+
+                ticket.AwaitingRefundRequest();
+
+                await _ticketRepository.UpdateAsync(ticket);
+
+                PaymentRefundLog paymentRefundLog = new PaymentRefundLog(
+                     ticket.Id,
+                     ticket.ClientId,
+                     "Awaiting refund request"
+                     );
+
+                await _paymentRefundLogRepository.AddAsync(paymentRefundLog);
+                response.Success = true;
+
                 return response;
             }
 
-           ticket.AwaitingRefundRequest();
-
-           await _ticketRepository.UpdateAsync(ticket);
-
-           PaymentRefundLog paymentRefundLog = new PaymentRefundLog(
-                ticket.Id,
-                ticket.ClientId,
-                "Awaiting refund request"
-                );
-
-           await _paymentRefundLogRepository.AddAsync(paymentRefundLog);
-
-           return response;
+            else
+            {
+                response.AddError("the ticket cannot be refunded");
+                return response;
+            }
         }
     }
 }
