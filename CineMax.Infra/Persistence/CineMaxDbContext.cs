@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace CineMax.Infra.Persistence
 {
-    public class ICineMaxDbContext : DbContext
+    public class CineMaxDbContext : DbContext
     {
-        public ICineMaxDbContext(DbContextOptions<ICineMaxDbContext> options) : base(options)
+        public CineMaxDbContext(DbContextOptions<CineMaxDbContext> options) : base(options)
         {
 
         }

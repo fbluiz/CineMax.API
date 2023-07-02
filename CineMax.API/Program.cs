@@ -29,7 +29,7 @@ builder.Services.AddAuthorization();
 
 var connectionString = builder.Configuration.GetConnectionString("CineMaxCsVini");
 // ATENÇÃO! Alterar a referência da string de conexão
-builder.Services.AddDbContext<ICineMaxDbContext>(options => options
+builder.Services.AddDbContext<CineMaxDbContext>(options => options
 .UseSqlServer(connectionString));
 builder.Services.AddDbContext<IdentityDataContext>(options =>
     options.UseSqlServer(connectionString));

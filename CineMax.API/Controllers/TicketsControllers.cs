@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CineMax.API.Controllers
 {
     [Route("api/tickets")]
-    [Authorize]
     public class TicketsControllers : CineMaxBaseController
     {
         private readonly IMediator _mediator;

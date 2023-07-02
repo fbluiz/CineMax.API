@@ -6,9 +6,9 @@ namespace CineMax.Infra.Persistence.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly ICineMaxDbContext _dbContext;
+        protected readonly CineMaxDbContext _dbContext;
 
-        public Repository(ICineMaxDbContext dbContext)
+        public Repository(CineMaxDbContext dbContext)
         {
             _dbContext = dbContext;
         }

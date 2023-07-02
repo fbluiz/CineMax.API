@@ -5,7 +5,7 @@ namespace CineMax.Infra.Persistence.Repositories
 {
     public class ClientRepository : Repository<Client>, IClientRepository
     {
-        public ClientRepository(ICineMaxDbContext dbContext) : base(dbContext)
+        public ClientRepository(CineMaxDbContext dbContext) : base(dbContext)
         {
         }
     }

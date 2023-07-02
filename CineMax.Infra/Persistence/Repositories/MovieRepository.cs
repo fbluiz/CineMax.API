@@ -6,7 +6,7 @@ namespace CineMax.Infra.Persistence.Repositories
 {
     public class MovieRepository : Repository<Movie>, IMovieRepository
     {
-        public MovieRepository(ICineMaxDbContext dbContext) : base(dbContext)
+        public MovieRepository(CineMaxDbContext dbContext) : base(dbContext)
         {
         }
     }

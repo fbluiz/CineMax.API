@@ -12,7 +12,7 @@ namespace CineMax.Infra.Persistence.Repositories
     public class TicketRepository : Repository<Ticket>, ITicketRepository
     {
         private readonly string _connectionString;
-        public TicketRepository(ICineMaxDbContext dbContext, IConfiguration configuration) : base(dbContext)
+        public TicketRepository(CineMaxDbContext dbContext, IConfiguration configuration) : base(dbContext)
         {
             _connectionString = configuration.GetConnectionString("CineMaxCsVini");
         }

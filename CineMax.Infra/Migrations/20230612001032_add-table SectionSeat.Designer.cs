@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CineMax.Infra.Migrations
 {
-    [DbContext(typeof(ICineMaxDbContext))]
+    [DbContext(typeof(CineMaxDbContext))]
     [Migration("20230612001032_add-table SectionSeat")]
     partial class addtableSectionSeat
     {

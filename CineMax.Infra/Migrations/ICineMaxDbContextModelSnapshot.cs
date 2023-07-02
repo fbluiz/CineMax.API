@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CineMax.Infra.Migrations
 {
-    [DbContext(typeof(ICineMaxDbContext))]
+    [DbContext(typeof(CineMaxDbContext))]
     partial class ICineMaxDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

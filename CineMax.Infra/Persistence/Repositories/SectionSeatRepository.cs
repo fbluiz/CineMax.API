@@ -5,7 +5,7 @@ namespace CineMax.Infra.Persistence.Repositories
 {
     public class SectionSeatRepository : Repository<SectionSeat>, ISectionSeatRepository
     {
-        public SectionSeatRepository(ICineMaxDbContext dbContext) : base(dbContext)
+        public SectionSeatRepository(CineMaxDbContext dbContext) : base(dbContext)
         {
         }
 

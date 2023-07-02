@@ -7,7 +7,7 @@ namespace CineMax.Infra.Persistence.Repositories
 {
     public class SectionRepository : Repository<Section>, ISectionRepository
     {
-        public SectionRepository(ICineMaxDbContext dbContext) : base(dbContext)
+        public SectionRepository(CineMaxDbContext dbContext) : base(dbContext)
         {
         }
         public async Task<List<Section>> GetSectionsViewModelAsync(bool? disponible)

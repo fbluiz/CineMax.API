@@ -13,7 +13,7 @@ namespace CineMax.Infra.Persistence.Repositories
     {
         private readonly string _connectionString;
 
-        public RoomRepository(ICineMaxDbContext dbContext, IConfiguration configuration) : base(dbContext)
+        public RoomRepository(CineMaxDbContext dbContext, IConfiguration configuration) : base(dbContext)
         {
             _connectionString = configuration.GetConnectionString("CineMaxCsVini");
         }

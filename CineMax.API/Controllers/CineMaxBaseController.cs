@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace CineMax.API.Controllers
 {
-    public class CineMaxBaseController : ControllerBase
+    [Authorize]
+    public class CineMaxBaseController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         [NonAction]
         public virtual Guid ExtractUserIdFromToken()

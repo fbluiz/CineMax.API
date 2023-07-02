@@ -5,7 +5,7 @@ namespace CineMax.Infra.Persistence.Repositories
 {
     public class PaymentRefundLogRepository : Repository<PaymentRefundLog>, IPaymentRefundLogRepository
     {
-        public PaymentRefundLogRepository(ICineMaxDbContext dbContext) : base(dbContext)
+        public PaymentRefundLogRepository(CineMaxDbContext dbContext) : base(dbContext)
         {
         }
 

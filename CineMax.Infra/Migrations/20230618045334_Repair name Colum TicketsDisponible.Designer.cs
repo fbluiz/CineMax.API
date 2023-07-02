@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CineMax.Infra.Migrations
 {
-    [DbContext(typeof(ICineMaxDbContext))]
+    [DbContext(typeof(CineMaxDbContext))]
     [Migration("20230618045334_Repair name Colum TicketsDisponible")]
     partial class RepairnameColumTicketsDisponible
     {
