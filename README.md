@@ -14,7 +14,7 @@
     <li>Entity Framework Core</li>
     <li>Dapper</li>
     <li>Padrão Repository</li>
-    <li>Autenticação e Autorização com JWT (JSON Web Tokens)</li>
+    <li>Autenticação e Autorização com Identity e JWT (JSON Web Tokens)</li>
     <li>Code-First</li>
   </ul>
 
