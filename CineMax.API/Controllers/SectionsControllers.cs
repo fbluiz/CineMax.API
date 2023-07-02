@@ -1,10 +1,9 @@
 ﻿using CineMax.Application.Commands.CreateSection;
 using CineMax.Application.Commands.DeleteMovieCommand;
-using CineMax.Application.Commands.DeleteRoom;
 using CineMax.Application.Commands.UpdateSection;
 using CineMax.Application.Queries.GetAllSections;
 using CineMax.Application.Queries.GetSectionById;
-using CineMax.Infra.Auth.Constants;
+using CineMax.Infra.Core.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

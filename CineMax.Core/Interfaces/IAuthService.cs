@@ -1,7 +1,7 @@
 ﻿using CineMax.Core.DTOs.AuthDTOs.Requests;
 using CineMax.Core.DTOs.AuthDTOs.Responses;
 
-namespace CineMax.Core.Services.Auth
+namespace CineMax.Core.Interfaces
 {
     public interface IAuthService
     {

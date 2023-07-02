@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 
-namespace CineMax.Infra.Auth.Configurations
+namespace CineMax.Core.Auth.Configurations
 {
     public class JwtOptions
     {

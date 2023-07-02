@@ -1,9 +1,9 @@
 ﻿using CineMax.Core.DTOs.AuthDTOs.Requests;
 using CineMax.Core.DTOs.AuthDTOs.Responses;
 using CineMax.Core.Repositories;
-using CineMax.Core.Services.Auth;
 using MediatR;
 using CineMax.Core.Entities;
+using CineMax.Core.Interfaces;
 
 namespace CineMax.Application.Commands.CreateUserAndClient
 {

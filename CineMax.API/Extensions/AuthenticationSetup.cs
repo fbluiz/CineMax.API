@@ -1,4 +1,4 @@
-﻿using CineMax.Infra.Auth.Configurations;
+﻿using CineMax.Core.Auth.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;

@@ -1,13 +1,13 @@
-﻿using CineMax.Core.DTOs.AuthDTOs.Requests;
+﻿using CineMax.Core.Auth.Configurations;
+using CineMax.Core.DTOs.AuthDTOs.Requests;
 using CineMax.Core.DTOs.AuthDTOs.Responses;
-using CineMax.Core.Services.Auth;
-using CineMax.Infra.Auth.Configurations;
+using CineMax.Core.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace CineMax.Infra.Auth
+namespace CineMax.Core.Auth
 {
     public class AuthService : IAuthService
     {

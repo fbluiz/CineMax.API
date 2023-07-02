@@ -1,7 +1,7 @@
 ﻿using CineMax.Core.DTOs.PaymentDTOs.Request;
 using CineMax.Core.DTOs.PaymentDTOs.Response;
 
-namespace CineMax.Core.Services.Payment
+namespace CineMax.Core.Interfaces
 {
     public interface IPaymentService
     {

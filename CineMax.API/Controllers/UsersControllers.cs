@@ -1,7 +1,7 @@
 ﻿using CineMax.Application.Commands.CreateUserAndClient;
 using CineMax.Core.DTOs.AuthDTOs.Requests;
 using CineMax.Core.DTOs.AuthDTOs.Responses;
-using CineMax.Core.Services.Auth;
+using CineMax.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

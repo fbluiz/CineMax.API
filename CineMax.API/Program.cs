@@ -1,14 +1,12 @@
 using CineMax.API.Extensions;
 using CineMax.Application.Commands.CreateUser;
-using CineMax.Core.Entities;
+using CineMax.Core.Auth;
+using CineMax.Core.Interfaces;
 using CineMax.Core.Repositories;
-using CineMax.Core.Services.Auth;
-using CineMax.Core.Services.Payment;
-using CineMax.Infra.Auth;
+using CineMax.Core.Services;
 using CineMax.Infra.Auth.Data;
 using CineMax.Infra.Persistence;
 using CineMax.Infra.Persistence.Repositories;
-using CineMax.Infra.Services;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

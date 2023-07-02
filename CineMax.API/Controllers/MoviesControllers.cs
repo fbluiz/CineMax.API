@@ -3,7 +3,7 @@ using CineMax.Application.Commands.DeleteMovieCommand;
 using CineMax.Application.Commands.UpdateMovie;
 using CineMax.Application.Queries.GetAllMovies;
 using CineMax.Application.Queries.GetMovieById;
-using CineMax.Infra.Auth.Constants;
+using CineMax.Infra.Core.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,9 +1,9 @@
 ﻿using CineMax.Application.ViewModels;
 using CineMax.Core.DTOs.PaymentDTOs.Request;
 using CineMax.Core.Enums;
+using CineMax.Core.Interfaces;
 using CineMax.Core.Logs;
 using CineMax.Core.Repositories;
-using CineMax.Core.Services.Payment;
 using MediatR;
 
 namespace CineMax.Application.Commands.RepayTicket

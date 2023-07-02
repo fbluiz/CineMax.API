@@ -3,7 +3,7 @@ using CineMax.Application.Commands.DeleteRoom;
 using CineMax.Application.Commands.UpdateRoomCommand;
 using CineMax.Application.Queries.GetAllRoom;
 using CineMax.Application.Queries.GetRoomAndSectionById;
-using CineMax.Infra.Auth.Constants;
+using CineMax.Infra.Core.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

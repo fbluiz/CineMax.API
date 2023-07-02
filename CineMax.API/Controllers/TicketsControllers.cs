@@ -4,7 +4,7 @@ using CineMax.Application.Commands.RepayTicket;
 using CineMax.Application.Queries.GetMyTickets;
 using CineMax.Application.Queries.GetMyTicketsPendingRepay;
 using CineMax.Application.Queries.GetTicketsPendingRepay;
-using CineMax.Infra.Auth.Constants;
+using CineMax.Infra.Core.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
