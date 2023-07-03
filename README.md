@@ -33,3 +33,9 @@
     <li>Controle de disponibilidade e status das cadeiras: Permite controlar a disponibilidade e o status das cadeiras em uma sala para cada seção.</li>
     <li>Permite que cada cliente possua um usuário onde pode consultar seus tickets e solicitações de reembolso.</li>
   </ul>
+
+
+  <h2>Modelo Conceitual</h2>
+
+  ![umlCine](https://github.com/fbluiz/fbluiz/assets/96392802/ecf08ac0-d965-4a3e-9cd4-cf9538bd71c3)
+
